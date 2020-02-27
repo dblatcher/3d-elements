@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <style>
+        .red {
+            border: 1px solid red;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+    <script src='dist/3d-elements.js'></script>
+
+
+    <h1>This is a using dist</h1>
+    <p>This is a paragraph.</p>
+
+    <div style="perspective: 1000px;"></div>
+
+    <script>
+        console.log(e3d)
+        var cube = e3d.makeCube({
+            faceClass:'red',
+            size: [50],
+            spin: [45,0,10],
+        })
+       document.querySelector('div').appendChild(cube)
+
+        var pyramid = e3d.makePyramid({
+            faceClass:'red',
+            size: [150,80,60],
+            spin: [160,0,0],
+            move: [0,100,0],
+            addContentToFace: '<p>Hello</p>'
+        })
+        document.querySelector('div').appendChild(pyramid)
+    </script>
+
+</body>
+</html>
