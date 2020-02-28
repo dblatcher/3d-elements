@@ -13,6 +13,11 @@
             background-color: skyblue;
             text-align: center;
         }
+        .black {
+            border: 1px solid black;
+            background-color: gray;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -36,11 +41,20 @@
        document.querySelector('div').appendChild(cuboid)
 
        var decagon = e3d.makeDecagon({
-            faceClass:'red',
-            size: [100,100,4],
+            
+            size: [150,80],
             spin: [45,0,10],
             move: [100,0,0],
-            addContentToFace: '<p>Hello</p>'
+            addContentToFace: (face, index) => {
+                if (index == 0 || index == 11) {
+                    face.classList.add('black')
+                } else if (index%2 === 0) {
+                    face.classList.add('red')
+                } else {
+                    face.classList.add('blue')
+                }
+                face.innerText = index
+            }
         })
        document.querySelector('div').appendChild(decagon)
 
