@@ -1,4 +1,4 @@
-import * as E3d from './baseE3d'
+import * as E3d from '../baseE3d'
 
 function setUpFaces (size,units='px') {
     var faces = this.children;

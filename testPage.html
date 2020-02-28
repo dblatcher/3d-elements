@@ -8,6 +8,11 @@
             background-color: pink;
             text-align: center;
         }
+        .blue {
+            border: 1px solid blue;
+            background-color: skyblue;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -22,13 +27,22 @@
     <div style="perspective: 10000px;"></div>
 
     <script>
-        var cube = e3d.makeCube({
+        var cuboid = e3d.makeCuboid({
             faceClass:'red',
-            size: [50],
+            size: [50,100,40],
             spin: [45,0,10],
             addContentToFace: '<p>Hello</p>'
         })
-       document.querySelector('div').appendChild(cube)
+       document.querySelector('div').appendChild(cuboid)
+
+       var decagon = e3d.makeDecagon({
+            faceClass:'red',
+            size: [100,100,4],
+            spin: [45,0,10],
+            move: [100,0,0],
+            addContentToFace: '<p>Hello</p>'
+        })
+       document.querySelector('div').appendChild(decagon)
 
         var dodecahedron = e3d.makeDodecahedron({
             faceClass:'red',

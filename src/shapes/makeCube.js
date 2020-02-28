@@ -1,4 +1,4 @@
-import * as base from './baseE3d'
+import * as base from '../baseE3d'
 
 export default function makeCube (parameters={}) {
 
