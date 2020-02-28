@@ -6,6 +6,7 @@
         .red {
             border: 1px solid red;
             background-color: pink;
+            text-align: center;
         }
     </style>
 </head>
@@ -18,25 +19,25 @@
     <h1>This is a using dist</h1>
     <p>This is a paragraph.</p>
 
-    <div style="perspective: 1000px;"></div>
+    <div style="perspective: 10000px;"></div>
 
     <script>
-        console.log(e3d)
         var cube = e3d.makeCube({
             faceClass:'red',
             size: [50],
             spin: [45,0,10],
+            addContentToFace: '<p>Hello</p>'
         })
        document.querySelector('div').appendChild(cube)
 
-        var pyramid = e3d.makePyramid({
+        var dodecahedron = e3d.makeDodecahedron({
             faceClass:'red',
-            size: [150,80,60],
-            spin: [160,0,0],
+            size: [250],
+            spin: [0,0,0],
             move: [0,100,0],
-            addContentToFace: '<p>Hello</p>'
+            addContentToFace: '<p>dodecahedron</p>'
         })
-        document.querySelector('div').appendChild(pyramid)
+        document.querySelector('div').appendChild(dodecahedron)
     </script>
 
 </body>
