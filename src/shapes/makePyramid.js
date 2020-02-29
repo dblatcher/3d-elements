@@ -67,13 +67,10 @@ const setUpFaces = function(size,units='px') {
 
 
 export default function makePyramid (parameters={}) {
-
     var that = E3d.makeBaseE3d(parameters)
     E3d.putRightNumberOfFacesOn(that,5)
-
     that.setUpFaces = setUpFaces;
-
     that.setUpFaces(that.arg.size, that.arg.units)
+    that.setAttribute('e3d-shape','pyramid')
     return that;
-
 }

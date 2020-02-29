@@ -64,6 +64,7 @@ export default function makeDecagon (parameters={}) {
     var that = E3d.makeBaseE3d(parameters)
     E3d.putRightNumberOfFacesOn(that,12)
     that.setUpFaces = setUpFaces;
-    that.setUpFaces(that.arg.size, that.arg.units)
+	that.setUpFaces(that.arg.size, that.arg.units)
+	that.setAttribute('e3d-shape','decagon')
     return that;
 }

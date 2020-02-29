@@ -32,6 +32,7 @@ export default function makeCuboid (parameters={}) {
     var that = E3d.makeBaseE3d(parameters)
     E3d.putRightNumberOfFacesOn(that,6)
     that.setUpFaces = setUpFaces;
-    that.setUpFaces(that.arg.size, that.arg.units)
+	that.setUpFaces(that.arg.size, that.arg.units)
+	that.setAttribute('e3d-shape','cuboid')
     return that;
 }
