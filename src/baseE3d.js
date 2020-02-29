@@ -93,7 +93,7 @@ function setTransformWithAllPrefixes (targetElement,value) {
 
 function applySVG (face, points) {
     face.setAttribute('e3d-face','with-svg')
-    var svgString = '', pathString = '';   
+    let pathString = '';   
 
     for (var dot=0; dot<points.length; dot++){
         if (dot === 0) {pathString += "M"} else {pathString += "L"};

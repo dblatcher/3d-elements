@@ -25,6 +25,11 @@
             stroke:black;
             stroke-width: 1px;
         }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -40,18 +45,16 @@
 
     <script>
         var cuboid = e3d.makeCuboid({
-            faceClass:'red',
-            size: [50,100,40],
+            faceClass:'center red',
+            size: [150,200,80],
             spin: [45,0,10],
             addContentToFace: '<p>Hello</p>'
         })
        document.querySelector('div').appendChild(cuboid)
 
        var decagon = e3d.makeDecagon({
-            
             size: [150,80],
             spin: [45,0,10],
-            move: [100,0,0],
             addContentToFace: (face, index) => {
                 if (index == 0 || index == 11) {
                     face.classList.add('black')
@@ -66,8 +69,8 @@
        document.querySelector('div').appendChild(decagon)
 
         var dodecahedron = e3d.makeDodecahedron({
-            faceClass:'red',
-            size: [250],
+            faceClass:'red center',
+            size: [200],
             spin: [0,0,0],
             move: [0,100,0],
             addContentToFace: '<p>dodecahedron</p>'

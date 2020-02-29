@@ -1,6 +1,7 @@
 [e3d-shape] {
     transform-style: preserve-3d;
     margin: 0;
+    display: inline-block;
 }
 
 [e3d-face] {
