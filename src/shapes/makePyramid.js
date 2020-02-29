@@ -57,7 +57,7 @@ const setUpFaces = function(size,units='px') {
     E3d.setTransformWithAllPrefixes(faces[4],transformString);
     
     for (var i=1; i<=4; i++){
-        E3d.clipFace(faces[i],[ [50,0],[100,100],[0,100] ]);
+        E3d.applySVG(faces[i],[ [50,0],[100,100],[0,100] ]);
         faces[i].style.textAlign="center";
         faces[i].style.paddingTop='50%';			
     };

@@ -122,6 +122,7 @@ const moveSpinPropertyObject = {
 
 function makeBaseE3d(parameters={}) {
     let that= document.createElement('figure')
+    that.setAttribute('e3d-shape','base')
 
     parameters.size = parameters.size  || [10,10,10];
     if (typeof(parameters.size) === 'string') {parameters.size = parameters.size.trim().split(' ')};
@@ -154,14 +155,11 @@ function makeBaseE3d(parameters={}) {
         sz: parameters.spin[2]
     };
     
-    that.style.transformStyle = "preserve-3d";
     that.style.transform = '';
     that.style.transform += "translate3d(" + t.mx + ", " + t.my + ", " + t.mz + ")" ;
     that.style.transform += "rotateX(" + t.sx + "deg) rotateY(" + t.sy + "deg) rotateZ(" + t.sz + "deg)";
     that.style.width = "" + that.arg.size[0] + that.arg.units;
     that.style.height = "" + that.arg.size[1] + that.arg.units;
-    that.style.margin = 0;
-    that.style.display=
 
     Object.defineProperty (that,'spin',spinPropertyObject)
     Object.defineProperty (that,'move', movePropertyObject)
@@ -190,7 +188,7 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
                 parentShape.children[f].innerHTML = addContentToFace;
             };
         }
-        putNeccesaryStylesOnFace(parentShape.children[f]);
+        parentShape.children[f].setAttribute('e3d-face','true')
         if (
         (classRule == 'all') ||
         (classRule == 'blank' &&  parentShape.children[f].classList.length == 0 )
@@ -200,19 +198,7 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
             })
         };
     };
-    
-    function putNeccesaryStylesOnFace(face) {
-        face.style.position = "absolute";
-        face.style.transformStyle = "preserve-3d";
-        face.style.boxSizing = "border-box";
-        face.style.backfaceVisibility = "hidden";	
-        face.style.msBackfaceVisibility  = "hidden";
-        face.style.WebkitBackfaceVisibility  = "hidden";		
-        face.style.MozBackfaceVisibility  = "hidden";			
-        face.style.MozBackfaceVisibility  = "hidden";					
-        face.style.visibility = 'visible';
-            
-    };
+
 };
 
 function setTransformWithAllPrefixes (targetElement,value) {
@@ -224,70 +210,29 @@ function setTransformWithAllPrefixes (targetElement,value) {
 };	
 
 
-function clipFace (face, points) {
-    var svgString = '', 
-    pathString = '', 
-    styleString='', 
-    clipString = 'polygon(', 
-    color, 
-    width, 
-    dashArrayString;
-            
+function applySVG (face, points) {
+    face.setAttribute('e3d-face','with-svg')
+    var svgString = '', pathString = '';   
+
     for (var dot=0; dot<points.length; dot++){
         if (dot === 0) {pathString += "M"} else {pathString += "L"};
         pathString += `${points[dot][0]} ${points[dot][1]} `;
-        clipString += `${points[dot][0]}% ${points[dot][1]}%`;
-        if (dot !== points.length-1) {clipString += ','}
     }
     pathString += "Z";
-    clipString += ")";
-    
-    // elements created from JS (not defined in HTML) are in no document so have no computed style 
-    // the elements (not just the face child- that breaks the structure) are 'dipped' into the dom to getComputedStyle
-    // copy the values needed into an object, then remove element from the document again.
-    // doing this with element defined in HTML causes "TypeError: Cannot redefine property" because the customElement constructor is rerun
-    
-    var cStyle, cStyleValues={}, valuesNeeded = [], faceDefinedInHTML;
-    valuesNeeded.push('border-top-color','border-color','border-width','border-top-width','border-style','border-top-style');
-    if (face.parentElement.parentElement){faceDefinedInHTML = true} else{faceDefinedInHTML = false}; 
-
-    if (!faceDefinedInHTML) {document.body.appendChild(face.parentElement);}
-    cStyle=getComputedStyle(face);
-    for (var j=0; j<valuesNeeded.length; j++) {
-        cStyleValues[valuesNeeded[j]] = cStyle[valuesNeeded[j]]
-    };	
-    if (!faceDefinedInHTML) {document.body.removeChild(face.parentElement);}
-    
-    color = cStyleValues['border-color'] || cStyleValues['border-top-color'] || 'rgb(0,0,0)';
-    width = cStyleValues['border-width'] || cStyleValues['border-top-width'] || '1px';
-    
-    switch(cStyleValues['border-style'] || cStyleValues['border-top-style']){
-        case 'dotted':
-            dashArrayString = "1";break;
-        case 'dashed':
-            dashArrayString = "4 2";break;
-        case 'solid':
-            dashArrayString = "";break;
-        default:
-            dashArrayString = "";
-    }
-    
-    styleString = `stroke:${color}; stroke-width:${width};`;
     
     svgString += '<svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"'
-    svgString += 'style="z-index:-1; pointer-events: none; position:absolute;left:0px;top:0px">';
+    svgString += 'e3d-svg="true"'
+    svgString += '>';
     svgString += '<path ';
-    svgString += 'stroke-dasharray="' + dashArrayString + '"';
-    svgString += 'style ="' + styleString + '"';
+
     svgString += 'd = "' + pathString + '"';
-    svgString += 'fill-opacity = "0"/>';
+    svgString += '/>';
     svgString += '/>';
     svgString += '</svg>';
 
-    face.style.clipPath= clipString;
     face.innerHTML += svgString;
     
 };	
 
 
-export {setTransformWithAllPrefixes, putRightNumberOfFacesOn, makeBaseE3d, clipFace}
+export {setTransformWithAllPrefixes, putRightNumberOfFacesOn, makeBaseE3d, applySVG}

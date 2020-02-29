@@ -9,4 +9,12 @@ module.exports = {
     library: 'e3d',
     libraryTarget: 'this',
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };

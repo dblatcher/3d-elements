@@ -31,7 +31,7 @@ function setUpFaces(size,units='px') {
 	transformString = '';
 	transformString += 'translateZ(' + size[1]/2 + units +')'
 	E3d.setTransformWithAllPrefixes(faces[0],transformString);
-	E3d.clipFace(faces[0],clipArray);
+	E3d.applySVG(faces[0],clipArray);
 	
 	
 	
@@ -56,7 +56,7 @@ function setUpFaces(size,units='px') {
 	faces[11].style.width  = decFaceWidth + units;	
 	faces[11].style.height = size[0] + units;
 	E3d.setTransformWithAllPrefixes(faces[11],"rotateY(180deg) translateZ(" + size[1]/2 + units + ")");
-	E3d.clipFace(faces[11],clipArray);
+	E3d.applySVG(faces[11],clipArray);
 	
 };
 

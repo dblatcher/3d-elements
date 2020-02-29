@@ -29,7 +29,7 @@ function setUpFaces (size,units='px') {
     for (var i=0; i < 12; i++){
         faces[i].style.width = pentWidth + units;
         faces[i].style.height = pentHeight + units;
-        E3d.clipFace(faces[i],[ [50,0],[100,100*v],[100*(1-h),100],[h*100,100],[0,100*v] ]);
+        E3d.applySVG(faces[i],[ [50,0],[100,100*v],[100*(1-h),100],[h*100,100],[0,100*v] ]);
         faces[i].style.textAlign="center";
         faces[i].style.paddingTop=  20 + '%';		
         faces[i].style.paddingLeft= (h*100) + '%';		

@@ -1,0 +1,25 @@
+[e3d-shape] {
+    transform-style: preserve-3d;
+    margin: 0;
+}
+
+[e3d-face] {
+    position: absolute;
+    transform-style: preserve-3d;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+}
+
+[e3d-face="with-svg"] {
+    border: none;
+    background: none;
+}
+
+[e3d-svg] {
+    fill: inherit;
+    z-index:-1;
+    pointer-events: none;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
