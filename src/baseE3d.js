@@ -234,5 +234,17 @@ function applySVG (face, points) {
     
 };	
 
+function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
-export {setTransformWithAllPrefixes, putRightNumberOfFacesOn, makeBaseE3d, applySVG}
+    return function (parameters={}) {
+        var that = makeBaseE3d(parameters)
+        putRightNumberOfFacesOn(that,numberOfFaces)
+        that.setUpFaces = setUpFacesFunction;
+        that.setUpFaces(that.arg.size, that.arg.units)
+        that.setAttribute('e3d-shape',name)
+        return that;
+    }
+
+}
+
+export {setTransformWithAllPrefixes, putRightNumberOfFacesOn, makeBaseE3d, applySVG, defineShapeType}

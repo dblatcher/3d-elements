@@ -130,11 +130,4 @@ function setUpFaces (size,units='px') {
             
 };
 
-export default function makePyramid (parameters={}) {
-    var that = E3d.makeBaseE3d(parameters)
-    E3d.putRightNumberOfFacesOn(that,12)
-    that.setUpFaces = setUpFaces;
-    that.setUpFaces(that.arg.size, that.arg.units)
-    that.setAttribute('e3d-shape','dodecahedron')
-    return that;
-}
+export default E3d.defineShapeType('dodecahedron',12,setUpFaces)
