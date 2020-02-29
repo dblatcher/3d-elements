@@ -101,18 +101,16 @@ function applySVG (face, points) {
     }
     pathString += "Z";
     
-    svgString += '<svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none"'
-    svgString += 'e3d-svg="true"'
-    svgString += '>';
-    svgString += '<path ';
+    const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svgElement.setAttribute('width','100%');
+    svgElement.setAttribute('height','100%');
+    svgElement.setAttributeNS('','viewBox','0 0 100 100');
+    svgElement.setAttributeNS('','preserveAspectRatio','none');
+    svgElement.setAttribute('e3d-svg','true');
 
-    svgString += 'd = "' + pathString + '"';
-    svgString += '/>';
-    svgString += '/>';
-    svgString += '</svg>';
+    svgElement.innerHTML = `<path d="${pathString}"/>`
+    face.appendChild(svgElement)
 
-    face.innerHTML += svgString;
-    
 };	
 
 function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
