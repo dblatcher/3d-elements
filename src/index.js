@@ -1,4 +1,3 @@
-
 import Cube from './shapes/cube'
 import Pyramid from './shapes/pyramid'
 import Dodecahedron from './shapes/dodecahedron'
@@ -20,6 +19,25 @@ const make = {
     Tetrahedron
 }
 
+function buildShapesInDom () {
+    if (!document) {return false}
+    const shapeNameList = Object.keys(make)
+    const targetElementsList = document.querySelectorAll('[e3d-shape]')
+    let targetElements = []
+    for (let i = 0; i<targetElementsList.length; i++){
+        targetElements.push(targetElementsList[i])
+    }
+    targetElements.forEach( target => {
+        const shapeName = target.getAttribute('e3d-shape')
+        if (shapeNameList.includes(shapeName)) {
+            make[shapeName].fromDom(target)
+        } else {
+            console.warn (`${shapeName} is not a supprted shape.`)
+        }
+    })
+
+}
+
 export {
-    make,presets
+    make,presets, buildShapesInDom
 }

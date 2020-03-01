@@ -39,11 +39,25 @@
         size="100 100 100"
         spin="30 60 10"
         face-class="red"
+        e3d-shape="Cube"
+        >
+            <div class="blue">Can this be folded?</div>
+            <div class="preset-e3d-black">Can this be folded?</div>
+            <div>1</div>
+            <div class="preset-e3d-black">2</div>
+        </figure>
+
+        <figure 
+        size="100 100 100"
+        spin="30 60 10"
+        move="100 100 100"
+        face-class="red"
+        e3d-shape="Hexagon"
         >
             <div class="blue">Can this be folded?</div>
             <div>Can this be folded?</div>
             <div>Can this be folded?</div>
-            <divclass="blue">Can this be folded?</div>
+            <div class="blue">Can this be folded?</div>
         </figure>
     </div>
 
@@ -72,7 +86,7 @@
     //     document.querySelector('div').appendChild(dodecahedron)
 
         var t = document.querySelector('figure')
-        e3d.make.Cube.fromDom(t)
+        //e3d.make.Cube.fromDom(t)
     </script>
 
 </body>

@@ -153,6 +153,8 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
         initShape(target,move,spin)
     }
 
+    factory.shapeName = name
+
     return factory
 }
 
