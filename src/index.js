@@ -20,7 +20,6 @@ const make = {
 }
 
 function buildShapesInDom () {
-    if (!document) {return false}
     const shapeNameList = Object.keys(make)
     const targetElementsList = document.querySelectorAll('[e3d-shape]')
     let targetElements = []
@@ -32,10 +31,13 @@ function buildShapesInDom () {
         if (shapeNameList.includes(shapeName)) {
             make[shapeName].fromDom(target)
         } else {
-            console.warn (`${shapeName} is not a supprted shape.`)
+            console.warn (`${shapeName} is not a supported shape.`)
         }
     })
+}
 
+if (window) {
+    window.onload = buildShapesInDom
 }
 
 export {
