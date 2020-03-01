@@ -17,14 +17,7 @@
             fill:skyblue;
             text-align: center;
         }
-        .black {
-            border: 1px solid black;
-            background-color: gray;
-            text-align: center;
-            fill:gray;
-            stroke:black;
-            stroke-width: 1px;
-        }
+
         .center {
             display: flex;
             justify-content: center;
@@ -47,24 +40,14 @@
         var cuboid = e3d.make.Cuboid({
             size: [150,200,80],
             spin: [45,0,10],
-            addContentToFace: [e3d.presets.numbered, e3d.presets.allGreen]
+            addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
         })
        document.querySelector('div').appendChild(cuboid)
 
        var decagon = e3d.make.Decagon({
             size: [150,80],
             spin: [45,0,10],
-            addContentToFace: (face, index) => {
-                if (index == 0 || index == 11) {
-                    face.classList.add('red')
-                    face.classList.add('center')
-                } else if (index%2 === 0) {
-                    face.classList.add('red')
-                } else {
-                    face.classList.add('blue')
-                }
-                face.innerText = index
-            }
+            addContentToFace: [e3d.presets.checkered]
         })
        document.querySelector('div').appendChild(decagon)
 

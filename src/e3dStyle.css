@@ -1,3 +1,37 @@
+.preset-e3d-green {
+    fill: lightgreen;
+    background-color: lightgreen;
+    border: 1px solid green;
+    stroke: green;
+    stroke-width: 1px;
+    color: green;
+}
+
+.preset-e3d-numbered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
+}
+
+.preset-e3d-black {
+    border: 1px solid black;
+    background-color: gray;
+    text-align: center;
+    fill:gray;
+    stroke:black;
+    stroke-width: 1px;
+}
+
+.preset-e3d-white {
+    border: 1px solid gray;
+    background-color: white;
+    text-align: center;
+    fill:white;
+    stroke:gray;
+    stroke-width: 1px;
+}
+
 [e3d-shape] {
     transform-style: preserve-3d;
     margin: 0;
@@ -25,18 +59,3 @@
     top: 0px;
 }
 
-.preset-e3d-green {
-    fill: lightgreen;
-    background-color: lightgreen;
-    border: 1px solid green;
-    stroke: green;
-    stroke-width: 1px;
-    color: green;
-}
-
-.preset-e3d-numbered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 200%;
-}
