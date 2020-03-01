@@ -34,31 +34,45 @@
     <h1>This is a using dist</h1>
     <p>This is a paragraph.</p>
 
-    <div style="perspective: 10000px;"></div>
+    <div style="perspective: 10000px;">
+        <figure 
+        size="100 100 100"
+        spin="30 60 10"
+        face-class="red"
+        >
+            <div class="blue">Can this be folded?</div>
+            <div>Can this be folded?</div>
+            <div>Can this be folded?</div>
+            <divclass="blue">Can this be folded?</div>
+        </figure>
+    </div>
 
     <script>
-        var cuboid = e3d.make.Cuboid({
-            size: [150,200,80],
-            spin: [45,0,10],
-            addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
-        })
-       document.querySelector('div').appendChild(cuboid)
+    //     var cuboid = e3d.make.Cuboid({
+    //         size: [150,200,80],
+    //         spin: [45,0,10],
+    //         addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
+    //     })
+    //    document.querySelector('div').appendChild(cuboid)
 
-       var decagon = e3d.make.Decagon({
-            size: [150,80],
-            spin: [45,0,10],
-            addContentToFace: [e3d.presets.checkered]
-        })
-       document.querySelector('div').appendChild(decagon)
+    //    var decagon = e3d.make.Decagon({
+    //         size: [150,80],
+    //         spin: [45,0,10],
+    //         addContentToFace: [e3d.presets.checkered]
+    //     })
+    //    document.querySelector('div').appendChild(decagon)
 
-        var dodecahedron = e3d.make.Dodecahedron({
-            faceClass:'red center',
-            size: [200],
-            spin: [0,0,0],
-            move: [0,100,0],
-            addContentToFace: '<p>dodecahedron</p>'
-        })
-        document.querySelector('div').appendChild(dodecahedron)
+    //     var dodecahedron = e3d.make.Dodecahedron({
+    //         faceClass:'red center',
+    //         size: [200],
+    //         spin: [0,0,0],
+    //         move: [0,100,0],
+    //         addContentToFace: '<p>dodecahedron</p>'
+    //     })
+    //     document.querySelector('div').appendChild(dodecahedron)
+
+        var t = document.querySelector('figure')
+        e3d.make.Cube.fromDom(t)
     </script>
 
 </body>

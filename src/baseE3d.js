@@ -1,58 +1,6 @@
 import * as timedFunctions from './gradual'
 import * as propertyMethods from './propertyMethods';
 
-function makeBaseE3d(parameters={}) {
-    let that= document.createElement('figure')
-    that.setAttribute('e3d-shape','base')
-
-    parameters.size = parameters.size  || [10,10,10];
-    if (typeof(parameters.size) === 'string') {parameters.size = parameters.size.trim().split(' ')};
-    if (typeof(parameters.size) === 'number') {parameters.size = [parameters.size,parameters.size,parameters.size]};
-    
-    parameters.spin = parameters.spin  || [0,0,0];
-    if (typeof(parameters.spin) === 'string') {parameters.spin = parameters.spin.trim().split(' ')};
-    
-    parameters.move = parameters.move  || [0,0,0, 'px'];
-    if (typeof(parameters.move) === 'string') {parameters.move = parameters.move.trim().split(' ')};
-    if (parameters.move.length<4) {parameters.move[3] = 'px'};
-    
-    parameters.faceClass = parameters.faceClass  || [];
-    if (typeof(parameters.faceClass) === 'string'){parameters.faceClass = parameters.faceClass.trim().split(" ")};
-    
-    that.arg = {
-        size:parameters.size,
-        units:parameters.units  ||'px',
-        faceClass:parameters.faceClass,
-        classRule: 'all',
-        addContentToFace:parameters.addContentToFace
-    };
-
-    var t = {
-        mx: '' + parameters.move[0] + parameters.move[3],
-        my: '' + parameters.move[1] + parameters.move[3],
-        mz: '' + parameters.move[2] + parameters.move[3],
-        sx: parameters.spin[0],
-        sy: parameters.spin[1],
-        sz: parameters.spin[2]
-    };
-    
-    that.style.transform = '';
-    that.style.transform += "translate3d(" + t.mx + ", " + t.my + ", " + t.mz + ")" ;
-    that.style.transform += "rotateX(" + t.sx + "deg) rotateY(" + t.sy + "deg) rotateZ(" + t.sz + "deg)";
-    that.style.width = "" + that.arg.size[0] + that.arg.units;
-    that.style.height = "" + that.arg.size[1] + that.arg.units;
-
-    Object.defineProperty (that,'spin',propertyMethods.spin)
-    Object.defineProperty (that,'move', propertyMethods.move)
-    Object.defineProperty (that, 'moveSpin',propertyMethods.moveSpin)
-
-    that.moveAndSpinOverTime = timedFunctions.moveAndSpinOverTime
-    that.isMoving = timedFunctions.isMoving
-    that.spinOverTime = timedFunctions.spinOverTime
-
-    return that
-}
-
 
 function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
     var faceClass = parentShape.arg.faceClass;
@@ -123,17 +71,89 @@ function applySVG (face, points) {
 
 };	
 
+function processSize(input) {
+    let size = input  || [100,100,100];
+    if (typeof(size) === 'string') {size = size.trim().split(' ')};
+    if (typeof(size) === 'number') {size = [size,size,size]};
+    return size
+}
+
+function processSpinOrMove (input) {
+    let output = input  || [0,0,0];
+    if (typeof(output) === 'string') {output = output.trim().split(' ')};
+    return output
+}
+
 function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
-    return function (parameters={}) {
-        var that = makeBaseE3d(parameters)
-        putRightNumberOfFacesOn(that,numberOfFaces)
-        that.setUpFaces = setUpFacesFunction;
-        that.setUpFaces(that.arg.size, that.arg.units)
-        that.setAttribute('e3d-shape',name)
-        return that;
+    function initShape (target, move, spin) {
+        putRightNumberOfFacesOn(target,numberOfFaces)
+        target.setUpFaces = setUpFacesFunction;
+        target.setUpFaces(target.arg.size, target.arg.units)
+        target.setAttribute('e3d-shape',name)
+
+        const {units} = target.arg
+
+        target.style.transform = `translate3d(${move[0]}${units}, ${move[1]}${units}, ${move[2]}${units}) rotateX(${spin[0]}deg) rotateY(${spin[1]}deg) rotateZ(${spin[2]}deg)`
+
+        Object.defineProperty (target,'spin',propertyMethods.spin)
+        Object.defineProperty (target,'move', propertyMethods.move)
+        Object.defineProperty (target, 'moveSpin',propertyMethods.moveSpin)
+    
+        target.moveAndSpinOverTime = timedFunctions.moveAndSpinOverTime
+        target.isMoving = timedFunctions.isMoving
+        target.spinOverTime = timedFunctions.spinOverTime
     }
 
+    let factory = function (parameters={}) {
+        let target= document.createElement('figure')
+            
+        let faceClass = parameters.faceClass  || [];
+        if (typeof(faceClass) === 'string'){faceClass = faceClass.trim().split(" ")};
+        
+        target.arg = {
+            size: processSize(parameters.size),
+            units:parameters.units  ||'px',
+            faceClass,
+            classRule: 'all',
+            addContentToFace:parameters.addContentToFace
+        };
+    
+        target.style.width = "" + target.arg.size[0] + target.arg.units;
+        target.style.height = "" + target.arg.size[1] + target.arg.units;
+
+        const spin = processSpinOrMove(parameters.spin) 
+        const move = processSpinOrMove(parameters.move) 
+        
+        initShape(target, move, spin)
+        return target;
+    }
+
+    factory.fromDom = function(target) {
+        
+        let faceClass = target.getAttribute('face-class') || [];
+        if (typeof(faceClass) === 'string'){faceClass = faceClass.trim().split(" ")};
+
+        const size = processSize(target.getAttribute('size'))
+
+        target.arg =  {
+            size,
+            units: 'px',
+            faceClass,
+            classRule: 'blank',
+            addContentToFace:[]
+        };
+
+        target.style.width = "" + target.arg.size[0] + target.arg.units;
+        target.style.height = "" + target.arg.size[1] + target.arg.units;
+
+        const move = processSpinOrMove(target.getAttribute('move'))
+        const spin = processSpinOrMove(target.getAttribute('spin'))
+
+        initShape(target,move,spin)
+    }
+
+    return factory
 }
 
 export {setTransformWithAllPrefixes, applySVG, defineShapeType}
