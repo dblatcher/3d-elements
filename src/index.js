@@ -10,6 +10,8 @@ import makeOctahedron from './shapes/Octahedron'
 import makePentagonalTrapezohedron from './shapes/PentagonalTrapezohedron'
 import makeTetrahedron from './shapes/Tetrahedron'
 
+import * as presets from './presets/colors'
+
 import css from './e3dStyle.css';
 
 
@@ -17,4 +19,5 @@ export {
     makeCube, makePyramid, makeDodecahedron, makeCuboid,makeDecagon,
     makeHexagon, makeIcosahedron, makeOctahedron, makePentagonalTrapezohedron,
     makeTetrahedron
+    ,presets
 }

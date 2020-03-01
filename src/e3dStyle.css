@@ -21,6 +21,22 @@
     z-index:-1;
     pointer-events: none;
     position:absolute;
-    left:0px;
-    top:0px;
+    left: 0px;
+    top: 0px;
+}
+
+.preset-e3d-green {
+    fill: lightgreen;
+    background-color: lightgreen;
+    border: 1px solid green;
+    stroke: green;
+    stroke-width: 1px;
+    color: green;
+}
+
+.preset-e3d-numbered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 200%;
 }

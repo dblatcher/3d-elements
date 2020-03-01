@@ -45,10 +45,9 @@
 
     <script>
         var cuboid = e3d.makeCuboid({
-            faceClass:'center red',
             size: [150,200,80],
             spin: [45,0,10],
-            addContentToFace: '<p>Hello</p>'
+            addContentToFace: [e3d.presets.numbered, e3d.presets.allGreen]
         })
        document.querySelector('div').appendChild(cuboid)
 

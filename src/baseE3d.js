@@ -64,10 +64,20 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
             parentShape.appendChild(document.createElement('div'));
             if (typeof(addContentToFace) === 'function') {
                 addContentToFace(parentShape.children[f],f)
-            };
-            if (typeof(addContentToFace) === 'string') {
+            }
+            else if (typeof(addContentToFace) === 'string') {
                 parentShape.children[f].innerHTML = addContentToFace;
-            };
+            }
+            else if (Array.isArray(addContentToFace)) {
+                addContentToFace.forEach(rule => {
+                    if (typeof(rule) === 'function') {
+                        rule(parentShape.children[f],f)
+                    }
+                    else if (typeof(rule) === 'string') {
+                        parentShape.children[f].innerHTML += rule;
+                    }
+                })
+            }
         }
         parentShape.children[f].setAttribute('e3d-face','true')
         if (
