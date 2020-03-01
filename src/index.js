@@ -1,23 +1,25 @@
 
-import makeCube from './shapes/makeCube'
-import makePyramid from './shapes/makePyramid'
-import makeDodecahedron from './shapes/dodecahedron'
-import makeCuboid from './shapes/cuboid'
-import makeDecagon from './shapes/decagon'
-import makeHexagon from './shapes/hexagon'
-import makeIcosahedron from './shapes/icosahedron'
-import makeOctahedron from './shapes/Octahedron'
-import makePentagonalTrapezohedron from './shapes/PentagonalTrapezohedron'
-import makeTetrahedron from './shapes/Tetrahedron'
+import Cube from './shapes/cube'
+import Pyramid from './shapes/pyramid'
+import Dodecahedron from './shapes/dodecahedron'
+import Cuboid from './shapes/cuboid'
+import Decagon from './shapes/decagon'
+import Hexagon from './shapes/hexagon'
+import Icosahedron from './shapes/icosahedron'
+import Octahedron from './shapes/Octahedron'
+import PentagonalTrapezohedron from './shapes/PentagonalTrapezohedron'
+import Tetrahedron from './shapes/Tetrahedron'
 
 import * as presets from './presets/colors'
 
 import css from './e3dStyle.css';
 
+const make = {
+    Cube, Pyramid, Dodecahedron, Cuboid,Decagon,
+    Hexagon, Icosahedron, Octahedron, PentagonalTrapezohedron,
+    Tetrahedron
+}
 
 export {
-    makeCube, makePyramid, makeDodecahedron, makeCuboid,makeDecagon,
-    makeHexagon, makeIcosahedron, makeOctahedron, makePentagonalTrapezohedron,
-    makeTetrahedron
-    ,presets
+    make,presets
 }
