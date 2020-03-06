@@ -19,9 +19,11 @@ function ConstantSpinner (target) {
         window.clearInterval(timerIndex)
     }
 
-    return {
-        turnVector, go, stop
-    }
+
+    this.turnVector=turnVector
+    this.go=go
+    this.stop=stop
+
 }
 
 export {ConstantSpinner}
