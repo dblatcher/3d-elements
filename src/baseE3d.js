@@ -1,7 +1,7 @@
-import * as timedFunctions from './gradual'
+import {GradualMover} from './gradual'
+import {ConstantSpinner} from './constant'
 import * as propertyMethods from './propertyMethods';
 
-import {ConstantSpinner} from './constant'
 
 function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
     var faceClass = parentShape.arg.faceClass;
@@ -101,10 +101,7 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
         Object.defineProperty (target,'move', propertyMethods.move)
         Object.defineProperty (target, 'moveSpin',propertyMethods.moveSpin)
     
-        target.moveAndSpinOverTime = timedFunctions.moveAndSpinOverTime
-        target.isMoving = timedFunctions.isMoving
-        target.spinOverTime = timedFunctions.spinOverTime
-
+        target.gradual = new GradualMover(target)
         target.constant= new ConstantSpinner(target)
     }
 
