@@ -1,5 +1,10 @@
 function GradualMover(target) {
 
+	let orderList = [{
+		destination:{move:target.move, spin:target.spin},
+		status:'start'
+	}]
+
 	function moveAndSpinOverTime (destination,timing = {}){
 		var startingPosition = target.move;
 		var startingRotation = target.spin;
@@ -53,16 +58,8 @@ function GradualMover(target) {
 		var moveIncrement = {x:displacement.x/steps, y:displacement.y/steps, z:displacement.z/steps}
 		var spinIncrement = {x:rotation.x/steps, y:rotation.y/steps, z:rotation.z/steps}
 		
-		// creates orderList(if not there from previous calls) as property of the target shape
-		// used for isMoving, also creates a log of movements on the shape
-		if (!target.orderList) {
-			target.orderList = [{
-				destination:{move:startingPosition, spin:startingRotation},
-				status:'start'
-			}];
-		};
 		var marker = {destination:destination, status:'pending'};
-		target.orderList.push(marker);
+		orderList.push(marker);
 		
 		return new Promise(function(resolve,reject) {
 			target.timer = setTimeout(function(){makeStep(steps)},10);
@@ -113,18 +110,20 @@ function GradualMover(target) {
 	}
 	
 	function isMoving(){
-		if (!target.orderList) {return false};
-		
-		for (var i = 0; i < target.orderList.length; i++) {
-			if (target.orderList[i].status == 'pending') {return true};
+		for (var i = 0; i < orderList.length; i++) {
+			if (orderList[i].status == 'pending') {return true};
 		}
-		
 		return false;
 	}
 	
 	this.spin = spinOverTime
 	this.moveAndSpin = moveAndSpinOverTime
 	this.isMoving = isMoving
+
+	Object.defineProperty(this,'orderList',{
+		get: function(){return orderList}
+	})
+
 }
 
 
