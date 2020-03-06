@@ -1,6 +1,7 @@
 import * as timedFunctions from './gradual'
 import * as propertyMethods from './propertyMethods';
 
+import {ConstantSpinner} from './constant'
 
 function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
     var faceClass = parentShape.arg.faceClass;
@@ -103,6 +104,8 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
         target.moveAndSpinOverTime = timedFunctions.moveAndSpinOverTime
         target.isMoving = timedFunctions.isMoving
         target.spinOverTime = timedFunctions.spinOverTime
+
+        target.constant= new ConstantSpinner(target)
     }
 
     let factory = function (parameters={}) {
