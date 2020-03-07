@@ -1,33 +1,27 @@
 import * as E3d from '../baseE3d'
+import * as faceStyling from './faceStyling'
 
 function setUpFaces (size,units='px') {
-	var faces = this.children;		
-	var transformString;
+	let faceStyles = faceStyling.makeList(20)
+
+	var faces = this.children;
 	
 	const triangleSide = size[0]/2;
-	const triangleHeight = triangleSide * Math.sqrt(3) / 2;			
+	const triangleHeight = triangleSide * Math.sqrt(3) / 2;
 	const inscribed = triangleSide * 0.7557613141;
 	const dihedral = 138.19; 
 
-	
-	var pyramidHeight = Math.sqrt( (triangleHeight*triangleHeight) - (triangleSide/2)*(triangleSide/2) ) ;
 	this.style.width = triangleSide + units;
 	this.style.height = (triangleHeight*2.5) + units;
 	
 	for (var i=0; i < 20; i++){
-		faces[i].style.width = triangleSide + units;
-		faces[i].style.height = triangleHeight + units;
-		faces[i].style.textAlign="center";
-		faces[i].style.paddingLeft='25%';		
-		faces[i].style.paddingRight='25%';		
+		faceStyles[i].width = triangleSide + units;
+		faceStyles[i].height = triangleHeight + units;
+		faceStyles[i]['text-align'] ="center";
+		faceStyles[i]['padding']='5% 25% 40% 25%';
 		E3d.applySVG(faces[i],[ [50,100],[100,0],[0,0] ]);
-		faces[i].style.paddingBottom ='40%';
-		faces[i].style.paddingTop ='5%';
 	}
-	
-	
-	
-	
+
 	var startTransform = '';
 	startTransform += 'translateY('+ (triangleHeight*0.75) + units + ')';
 	startTransform += 'translateZ('+ -inscribed + units + ')';
@@ -69,36 +63,37 @@ function setUpFaces (size,units='px') {
 	};
 	
 	
-	E3d.setTransformWithAllPrefixes(faces[0],t.s);
+	faceStyles[0]['transform'] = t.s;
 	
-	E3d.setTransformWithAllPrefixes(faces[1],t.s + t.b);
-	E3d.setTransformWithAllPrefixes(faces[2],t.s + t.r);
-	E3d.setTransformWithAllPrefixes(faces[3],t.s + t.l);
+	faceStyles[1]['transform'] = t.s + t.b;
+	faceStyles[2]['transform'] = t.s + t.r;
+	faceStyles[3]['transform'] = t.s + t.l;
 	
-	E3d.setTransformWithAllPrefixes(faces[4],t.s + t.l + t.l);
-	E3d.setTransformWithAllPrefixes(faces[5],t.s + t.l + t.r);
+	faceStyles[4]['transform'] = t.s + t.l + t.l;
+	faceStyles[5]['transform'] = t.s + t.l + t.r;
 	
-	E3d.setTransformWithAllPrefixes(faces[6],t.s + t.r + t.l );
-	E3d.setTransformWithAllPrefixes(faces[7],t.s + t.r + t.r );
+	faceStyles[6]['transform'] = t.s + t.r + t.l ;
+	faceStyles[7]['transform'] = t.s + t.r + t.r ;
 	
-	E3d.setTransformWithAllPrefixes(faces[8],t.s + t.b + t.l );
-	E3d.setTransformWithAllPrefixes(faces[9],t.s + t.b + t.r );
+	faceStyles[8]['transform'] = t.s + t.b + t.l ;
+	faceStyles[9]['transform'] = t.s + t.b + t.r ;
 	
-	E3d.setTransformWithAllPrefixes(faces[10],t.f);
+	faceStyles[10]['transform'] = t.f;
 	
-	E3d.setTransformWithAllPrefixes(faces[11],t.f + t.b);
-	E3d.setTransformWithAllPrefixes(faces[12],t.f + t.r);
-	E3d.setTransformWithAllPrefixes(faces[13],t.f + t.l);
+	faceStyles[11]['transform'] = t.f + t.b;
+	faceStyles[12]['transform'] = t.f + t.r;
+	faceStyles[13]['transform'] = t.f + t.l;
 	
-	E3d.setTransformWithAllPrefixes(faces[14],t.f + t.l + t.l);
-	E3d.setTransformWithAllPrefixes(faces[15],t.f + t.l + t.r);
+	faceStyles[14]['transform'] = t.f + t.l + t.l;
+	faceStyles[15]['transform'] = t.f + t.l + t.r;
 	
-	E3d.setTransformWithAllPrefixes(faces[16],t.f + t.r + t.l );
-	E3d.setTransformWithAllPrefixes(faces[17],t.f + t.r + t.r );
+	faceStyles[16]['transform'] = t.f + t.r + t.l ;
+	faceStyles[17]['transform'] = t.f + t.r + t.r ;
 	
-	E3d.setTransformWithAllPrefixes(faces[18],t.f + t.b + t.l );
-	E3d.setTransformWithAllPrefixes(faces[19],t.f + t.b + t.r );
-	
+	faceStyles[18]['transform'] = t.f + t.b + t.l ;
+	faceStyles[19]['transform'] = t.f + t.b + t.r ;
+
+	faceStyling.apply(this, faceStyles)
 };
 
 export default E3d.defineShapeType('icosahedron',20,setUpFaces)

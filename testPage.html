@@ -37,19 +37,19 @@
     <div style="perspective: 10000px;">
         <figure e3d-shape="Cube"
         size="100 100 100"
-        spin="30 60 10"
+        spin="270 270 0"
         face-class="red">
             <div class="blue">Can this be folded?</div>
-            <div class="preset-e3d-black">Can this be folded?</div>
-            <div>1</div>
-            <div class="preset-e3d-black">2</div>
+            <div class="preset-e3d-black">I am number one</div>
+            <div>2</div>
+            <div class="preset-e3d-black">3</div>
         </figure>
 
-        <figure e3d-shape="Hexagon"
+        <figure e3d-shape="Cube"
         size="100 100 100"
         spin="30 60 10"
         move="100 100 100"
-        face-class="red">
+        face-class="center blue">
             <div class="blue">Can this be folded?</div>
             <div>Can this be folded?</div>
             <div>Can this be folded?</div>
@@ -58,12 +58,12 @@
     </div>
 
     <script>
-    //     var cuboid = e3d.make.Cuboid({
-    //         size: [150,200,80],
-    //         spin: [45,0,10],
-    //         addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
-    //     })
-    //    document.querySelector('div').appendChild(cuboid)
+        var shape = e3d.make.Icosahedron({
+            size: [150,200,80],
+            spin: [45,0,10],
+            addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
+        })
+       document.querySelector('div').appendChild(shape)
 
     //    var decagon = e3d.make.Decagon({
     //         size: [150,80],

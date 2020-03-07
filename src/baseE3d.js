@@ -2,6 +2,7 @@ import {GradualMover} from './gradual'
 import {ConstantSpinner} from './constant'
 import * as propertyMethods from './propertyMethods';
 
+let hashNumber = 100
 
 function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
     var faceClass = parentShape.arg.faceClass;
@@ -28,7 +29,7 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
                 })
             }
         }
-        parentShape.children[f].setAttribute('e3d-face','true')
+        parentShape.children[f].setAttribute('e3d-face',f.toString())
         if (
         (classRule == 'all') ||
         (classRule == 'blank' &&  parentShape.children[f].classList.length == 0 )
@@ -51,7 +52,7 @@ function setTransformWithAllPrefixes (targetElement,value) {
 
 
 function applySVG (face, points) {
-    face.setAttribute('e3d-face','with-svg')
+    face.setAttribute('e3d-face-with-svg','true')
     let pathString = '';   
 
     for (var dot=0; dot<points.length; dot++){
@@ -88,6 +89,7 @@ function processSpinOrMove (input) {
 function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
     function initShape (target, move, spin) {
+        target.setAttribute('hash',hashNumber++)
         putRightNumberOfFacesOn(target,numberOfFaces)
         target.setUpFaces = setUpFacesFunction;
         target.setUpFaces(target.arg.size, target.arg.units)
@@ -124,13 +126,13 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
         const spin = processSpinOrMove(parameters.spin) 
         const move = processSpinOrMove(parameters.move) 
-        
+
         initShape(target, move, spin)
+        target.wasBuiltByScript = true
         return target;
     }
 
     factory.fromDom = function(target) {
-        
         let faceClass = target.getAttribute('face-class') || [];
         if (typeof(faceClass) === 'string'){faceClass = faceClass.trim().split(" ")};
 

@@ -45,7 +45,7 @@
     backface-visibility: hidden;
 }
 
-[e3d-face="with-svg"] {
+[e3d-face-with-svg] {
     border: none;
     background: none;
 }

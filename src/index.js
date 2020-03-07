@@ -27,6 +27,7 @@ function buildShapesInDom () {
         targetElements.push(targetElementsList[i])
     }
     targetElements.forEach( target => {
+        if (target.wasBuiltByScript) {return false}
         const shapeName = target.getAttribute('e3d-shape')
         if (shapeNameList.includes(shapeName)) {
             make[shapeName].fromDom(target)
