@@ -11,9 +11,15 @@ function setUpFaces (size,units='px') {
 	const inscribed = triangleSide * 0.7557613141;
 	const dihedral = 138.19; 
 
+	//todo - remove when not setting inline in base
 	this.style.width = triangleSide + units;
 	this.style.height = (triangleHeight*2.5) + units;
 	
+    const shapeStyle = {
+        "width" : `${triangleSide}${units}`,
+        "height" : `${triangleHeight*2.5}${units}`,
+    }
+
 	for (var i=0; i < 20; i++){
 		faceStyles[i].width = triangleSide + units;
 		faceStyles[i].height = triangleHeight + units;
@@ -93,7 +99,7 @@ function setUpFaces (size,units='px') {
 	faceStyles[18]['transform'] = t.f + t.b + t.l ;
 	faceStyles[19]['transform'] = t.f + t.b + t.r ;
 
-	faceStyling.apply(this, faceStyles)
+	faceStyling.apply(this, faceStyles, shapeStyle)
 };
 
 export default E3d.defineShapeType('icosahedron',20,setUpFaces)

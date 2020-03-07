@@ -1,6 +1,10 @@
 import * as E3d from '../baseE3d'
+import * as faceStyling from './faceStyling'
 
 function setUpFaces(size,units='px') {
+
+
+
 	var faces = this.children;
 	var transformString;
 	
@@ -22,22 +26,30 @@ function setUpFaces(size,units='px') {
 		clipArray[p][1] = cos18*(50*Math.cos(36*p*deg2Rad)) +50;
 	}
 
+
+	const shapeStyle = {
+		"width" : `${decFaceWidth}${units}`,
+        "height" : `${size[0]}${units}`,
+    }
+    let faceStyles = faceStyling.makeList(12)
+
 	
 	this.style.width = decFaceWidth + units;	
 	this.style.height = size[0] + units;
 	
-	faces[0].style.width  = decFaceWidth + units;	
-	faces[0].style.height = size[0] + units;
+	faceStyles[0].width  = decFaceWidth + units;	
+	faceStyles[0].height = size[0] + units;
 	transformString = '';
 	transformString += 'translateZ(' + size[1]/2 + units +')'
-	E3d.setTransformWithAllPrefixes(faces[0],transformString);
+	faceStyles[0].transform = transformString
+	
 	E3d.applySVG(faces[0],clipArray);
 	
 	
 	
 	for (var f=1;f<11;f++) {	
-		faces[f].style.height = size[1] + units;
-		faces[f].style.width  = decSide  + units;
+		faceStyles[f].height = size[1] + units;
+		faceStyles[f].width  = decSide  + units;
 		transformString = '';
 		transformString += 'translateX(' + decFaceWidth/2 + units +')';	
 		transformString += 'translateX(' + -decSide/2 + units +')';	
@@ -48,16 +60,16 @@ function setUpFaces(size,units='px') {
 		transformString += 'rotateY(162deg)';
 		transformString += 'rotateY(' + 36*(f-1) + 'deg)';
 		transformString += 'translateZ(' + decFaceWidth*cos18/2  + units +')';
-	
-
-		E3d.setTransformWithAllPrefixes(faces[f],transformString);
+		faceStyles[f].transform = transformString
 	}
 	
-	faces[11].style.width  = decFaceWidth + units;	
-	faces[11].style.height = size[0] + units;
-	E3d.setTransformWithAllPrefixes(faces[11],"rotateY(180deg) translateZ(" + size[1]/2 + units + ")");
+	faceStyles[11].width  = decFaceWidth + units;	
+	faceStyles[11].height = size[0] + units;
+	faceStyles[11].transform = "rotateY(180deg) translateZ(" + size[1]/2 + units + ")"
 	E3d.applySVG(faces[11],clipArray);
 	
+	faceStyling.apply(this, faceStyles, shapeStyle)
+
 };
 
 export default E3d.defineShapeType('decagon',12,setUpFaces)

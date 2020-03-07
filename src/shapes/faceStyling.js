@@ -11,9 +11,18 @@ function makeList (quantity) {
 }
 
 
-function apply(target, faceStyles) {
+function apply(target, faceStyles, shapeStyle = null) {
     const hash = target.getAttribute('hash')
     const style = document.createElement('style')
+
+    if (shapeStyle) {
+        style.textContent += `[hash="${hash}"] {`
+        Object.keys(shapeStyle).forEach( prop => {
+            style.textContent +=`${prop}: ${shapeStyle[prop]};
+`
+        })
+        style.textContent +=`}`
+    }
 
     faceStyles.forEach ((faceStyle, index) => { 
         style.textContent += `[hash="${hash}"]>[e3d-face="${index}"] {

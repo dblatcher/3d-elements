@@ -2,8 +2,11 @@ import * as E3d from '../baseE3d'
 import * as faceStyling from './faceStyling'
 
 function setUpFaces (size,units='px') {
-    this.style.height = "" + size[0] + units;
-
+    
+    const shapeStyle = {
+        "width" : `${size[0]}${units}`,
+        "height" : `${size[0]}${units}`,
+    }
     let faceStyles = faceStyling.makeList(6)
 
     for (var f=0; f<6; f++) {
@@ -18,7 +21,7 @@ function setUpFaces (size,units='px') {
     faceStyles[4].transform =`rotateY(270deg) translateZ(${size[0]/2}${units})`;
     faceStyles[5].transform =`rotateY(180deg) translateZ(${size[0]/2}${units})`;
 
-    faceStyling.apply(this, faceStyles)
+    faceStyling.apply(this, faceStyles, shapeStyle)
 };
 
 export default E3d.defineShapeType('cube',6,setUpFaces)
