@@ -1,9 +1,10 @@
 import * as E3d from '../baseE3d'
+import * as faceStyling from './faceStyling'
 
 function setUpFaces (size,units='px') {
     var faces = this.children;
     
-    var hypoth,angle, transformString;
+    var transformString;
     
     const sin72 = Math.sqrt(10 + 2*Math.sqrt(5))/4;
     const sin36 = Math.sqrt(10 - 2*Math.sqrt(5))/4;			
@@ -26,14 +27,21 @@ function setUpFaces (size,units='px') {
     var inscribed = pentSide*1.11351;
     
     
+    const shapeStyle = {
+		"width" : `${pentWidth}${units}`,
+        "height" : `${pentHeight*2}${units}`,
+    }
+    let faceStyles = faceStyling.makeList(12)
+
+    
     for (var i=0; i < 12; i++){
-        faces[i].style.width = pentWidth + units;
-        faces[i].style.height = pentHeight + units;
+        faceStyles[i]["width"] = pentWidth + units;
+        faceStyles[i]["height"] = pentHeight + units;
         E3d.applySVG(faces[i],[ [50,0],[100,100*v],[100*(1-h),100],[h*100,100],[0,100*v] ]);
-        faces[i].style.textAlign="center";
-        faces[i].style.paddingTop=  20 + '%';		
-        faces[i].style.paddingLeft= (h*100) + '%';		
-        faces[i].style.paddingRight= (h*100) + '%';
+        faceStyles[i]["text-align"]="center";
+        faceStyles[i]["padding-top"]=  20 + '%';		
+        faceStyles[i]["padding-left"] = (h*100) + '%';		
+        faceStyles[i]["padding-right"]= (h*100) + '%';
     };
 
     var startTransform = ''
@@ -75,59 +83,60 @@ function setUpFaces (size,units='px') {
     toDownLeftTransfrom += 'translateX('+ -0.035*pentWidth + units + ')';
     
     
-    E3d.setTransformWithAllPrefixes(faces[0],startTransform);
+    faceStyles[0]["transform"] =startTransform;
 
     transformString = startTransform;
     transformString += toBaseTransform;	
     transformString += toUpLeftTransform;
-    E3d.setTransformWithAllPrefixes(faces[1],transformString);
+    faceStyles[1]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toBaseTransform;
     transformString += toUpRightTransform;			
-    E3d.setTransformWithAllPrefixes(faces[2],transformString);
+    faceStyles[2]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toBaseTransform;
-    E3d.setTransformWithAllPrefixes(faces[3],transformString);
+    faceStyles[3]["transform"]=transformString;
     
     transformString = startTransform;
     transformString += toUpRightTransform;
-    E3d.setTransformWithAllPrefixes(faces[4],transformString);
+    faceStyles[4]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toUpLeftTransform;
-    E3d.setTransformWithAllPrefixes(faces[5],transformString);
+    faceStyles[5]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toDownRightTransfrom;
-    E3d.setTransformWithAllPrefixes(faces[6],transformString);
+    faceStyles[6]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toDownLeftTransfrom;			
-    E3d.setTransformWithAllPrefixes(faces[7],transformString);
+    faceStyles[7]["transform"]=transformString;
         
     transformString = startTransform;
     transformString += toUpLeftTransform;
     transformString += toUpLeftTransform;
-    E3d.setTransformWithAllPrefixes(faces[8],transformString);
+    faceStyles[8]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toUpLeftTransform;
     transformString += toUpRightTransform;
-    E3d.setTransformWithAllPrefixes(faces[9],transformString);
+    faceStyles[9]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toUpRightTransform;
     transformString += toUpRightTransform;
-    E3d.setTransformWithAllPrefixes(faces[10],transformString);
+    faceStyles[10]["transform"]=transformString;
 
     transformString = startTransform;
     transformString += toUpRightTransform;
     transformString += toUpRightTransform;
     transformString += toUpLeftTransform;
-    E3d.setTransformWithAllPrefixes(faces[11],transformString);
-            
+    faceStyles[11]["transform"]=transformString;
+        
+    faceStyling.apply(this, faceStyles, shapeStyle)
 };
 
 export default E3d.defineShapeType('dodecahedron',12,setUpFaces)
