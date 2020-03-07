@@ -1,4 +1,5 @@
 import * as E3d from '../baseE3d'
+import * as faceStyling from './faceStyling'
 
 function setUpFaces (size,units='px') {
 	var faces = this.children;
@@ -18,16 +19,22 @@ function setUpFaces (size,units='px') {
 	this.style.width = hexWidth + units;	
 	this.style.height = size[0] + units;
 	
-	faces[0].style.width  = hexWidth + units;	
-	faces[0].style.height = size[0] + units;
+	const shapeStyle = {
+		"width" : `${hexWidth}${units}`,
+        "height" : `${size[0]}${units}`,
+    }
+    let faceStyles = faceStyling.makeList(8)
+
+	faceStyles[0].width  = hexWidth + units;	
+	faceStyles[0].height = size[0] + units;
 	transformString = '';
 	transformString += 'translateZ(' + size[1]/2 + units +')'
-	E3d.setTransformWithAllPrefixes(faces[0],transformString);
+	faceStyles[0].transform = transformString
 	E3d.applySVG(faces[0],hexagonalCornerArray);
 	
 	for (var f=1;f<7;f++) {	
-		faces[f].style.width  = size[0]/Math.pow(3,1/2)  + units;		
-		faces[f].style.height = size[1]+ units;
+		faceStyles[f].width  = size[0]/Math.pow(3,1/2)  + units;		
+		faceStyles[f].height = size[1]+ units;
 		transformString = '';
 		transformString += 'translateY(' + -size[1]*.5 + units + ')';
 		transformString += 'translateY(' + size[0]*.5 + units + ')';			
@@ -36,14 +43,15 @@ function setUpFaces (size,units='px') {
 		transformString += 'rotateX(90deg) ';
 		transformString += 'rotateY('+ 60*(f-1) +'deg) ';
 		transformString += 'translateZ(' + size[0]/(2) + units + ')';	
-		E3d.setTransformWithAllPrefixes(faces[f],transformString);
+		faceStyles[f].transform = transformString
 	}
 	
-	faces[7].style.width  = hexWidth + units;		
-	faces[7].style.height = size[0] + units;
-	E3d.setTransformWithAllPrefixes(faces[7],"rotateY(180deg) translateZ(" + size[1]/2 + units + ")");
+	faceStyles[7].width  = hexWidth + units;		
+	faceStyles[7].height = size[0] + units;
+	faceStyles[7].transform = "rotateY(180deg) translateZ(" + size[1]/2 + units + ")";
 	E3d.applySVG(faces[7],hexagonalCornerArray);
 	
+	faceStyling.apply(this, faceStyles, shapeStyle)
 };
 
 export default E3d.defineShapeType('hexagon',8, setUpFaces)
