@@ -28,7 +28,7 @@ function setUpFaces (size,units='px') {
 	transformString = '';
 	transformString += 'translateZ(' + size[1]/2 + units +')'
 	faceStyles[0].transform = transformString
-	E3d.applySVG(faces[0],hexagonalCornerArray);
+	faceStyling.prependSvg(faces[0],hexagonalCornerArray);
 	
 	for (var f=1;f<7;f++) {	
 		faceStyles[f].width  = size[0]/Math.pow(3,1/2)  + units;		
@@ -47,7 +47,7 @@ function setUpFaces (size,units='px') {
 	faceStyles[7].width  = hexWidth + units;		
 	faceStyles[7].height = size[0] + units;
 	faceStyles[7].transform = "rotateY(180deg) translateZ(" + size[1]/2 + units + ")";
-	E3d.applySVG(faces[7],hexagonalCornerArray);
+	faceStyling.prependSvg(faces[7],hexagonalCornerArray);
 	
 	faceStyling.apply(this, faceStyles, shapeStyle)
 };

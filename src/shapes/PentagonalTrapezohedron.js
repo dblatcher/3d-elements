@@ -51,7 +51,7 @@ function setUpFaces (size,units='px') {
 		transformString += 'rotateX(' + -angle2 + 'deg)';
 		
         faceStyles[i]["transform"] = transformString
-		E3d.applySVG(faces[i],[ [50,0],[100,kiteRatio],[50,100],[0,kiteRatio] ]);
+		faceStyling.prependSvg(faces[i],[ [50,0],[100,kiteRatio],[50,100],[0,kiteRatio] ]);
 	};
 
 	faceStyling.apply(this, faceStyles, shapeStyle)

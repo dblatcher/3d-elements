@@ -43,27 +43,7 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
 };
 
 
-function applySVG (face, points) {
-    face.setAttribute('e3d-face-with-svg','true')
-    let pathString = '';   
 
-    for (var dot=0; dot<points.length; dot++){
-        if (dot === 0) {pathString += "M"} else {pathString += "L"};
-        pathString += `${points[dot][0]} ${points[dot][1]} `;
-    }
-    pathString += "Z";
-    
-    const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svgElement.setAttribute('width','100%');
-    svgElement.setAttribute('height','100%');
-    svgElement.setAttributeNS('','viewBox','0 0 100 100');
-    svgElement.setAttributeNS('','preserveAspectRatio','none');
-    svgElement.setAttribute('e3d-svg','true');
-
-    svgElement.innerHTML = `<path d="${pathString}"/>`
-    face.appendChild(svgElement)
-
-};	
 
 function processSize(input) {
     let size = input  || [100,100,100];
@@ -146,4 +126,4 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
     return factory
 }
 
-export {applySVG, defineShapeType}
+export {defineShapeType}

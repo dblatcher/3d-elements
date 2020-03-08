@@ -22,7 +22,7 @@ function setUpFaces (size,units='px') {
 		faceStyles[i].height = triangleHeight + units;
 		faceStyles[i]['text-align'] ="center";
 		faceStyles[i]['padding']='5% 25% 40% 25%';
-		E3d.applySVG(faces[i],[ [50,100],[100,0],[0,0] ]);
+		faceStyling.prependSvg(faces[i],[ [50,100],[100,0],[0,0] ]);
 	}
 
 	var startTransform = '';

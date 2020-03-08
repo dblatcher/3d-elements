@@ -61,7 +61,7 @@ const setUpFaces = function(size,units='px') {
     faceStyles[4].transform = transformString;
 
     for (var i=1; i<=4; i++){
-        E3d.applySVG(faces[i],[ [50,0],[100,100],[0,100] ]);
+        faceStyling.prependSvg(faces[i],[ [50,0],[100,100],[0,100] ]);
         faceStyles[i]["text-align"]="center";
         faceStyles[i]["padding-top"]='50%';
     };

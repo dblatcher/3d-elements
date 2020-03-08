@@ -22,7 +22,7 @@ function setUpFaces (size,units='px') {
         faceStyles[i]["padding-left"] = '25%';        
         faceStyles[i]["padding-right"]='25%';        
         faceStyles[i]["padding-top"]='40%';    
-        E3d.applySVG(faces[i],[ [50,0],[100,100],[0,100] ]);
+        faceStyling.prependSvg(faces[i],[ [50,0],[100,100],[0,100] ]);
         transformString = '';
         if (i < 4) {
             transformString += 'translateY(' + (pyramidHeight/2-triangleHeight/2) + units +')';                
