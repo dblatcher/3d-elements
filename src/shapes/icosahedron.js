@@ -11,10 +11,7 @@ function setUpFaces (size,units='px') {
 	const inscribed = triangleSide * 0.7557613141;
 	const dihedral = 138.19; 
 
-	//todo - remove when not setting inline in base
-	this.style.width = triangleSide + units;
-	this.style.height = (triangleHeight*2.5) + units;
-	
+
     const shapeStyle = {
         "width" : `${triangleSide}${units}`,
         "height" : `${triangleHeight*2.5}${units}`,

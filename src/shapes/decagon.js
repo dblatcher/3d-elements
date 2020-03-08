@@ -33,10 +33,6 @@ function setUpFaces(size,units='px') {
     }
     let faceStyles = faceStyling.makeList(12)
 
-	
-	this.style.width = decFaceWidth + units;	
-	this.style.height = size[0] + units;
-	
 	faceStyles[0].width  = decFaceWidth + units;	
 	faceStyles[0].height = size[0] + units;
 	transformString = '';

@@ -29,8 +29,16 @@ function apply(target, faceStyles, shapeStyle = null) {
 `
         const props = Object.keys(faceStyle)
         props.forEach (prop => {
+            if (prop === 'transform') {
+                style.textContent +=`
+                webkitTransform: ${faceStyle[prop]};
+                MozTransform: ${faceStyle[prop]};
+                msTransform: ${faceStyle[prop]};
+                OTransform: ${faceStyle[prop]};
+                `
+            }
             style.textContent +=`${prop}: ${faceStyle[prop]};
-`
+            `
         })
         style.textContent += `}`
     })

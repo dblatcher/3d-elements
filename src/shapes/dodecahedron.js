@@ -16,11 +16,8 @@ function setUpFaces (size,units='px') {
     var pentSide = 2*sin36 * pentRadius
     var pentHeight  = pentWidth * ((sin72+sin36) / (2*sin54)); 
     var pentCord = pentHeight-pentRadius;
-    
-        
-    this.style.width = pentWidth + units;
-    this.style.height = (pentHeight*2) + units;
-    
+
+
     const dihedral = 116.56505;
     var v = sin36 / (sin36 + sin72);
     var h = sin18 / (1 + sin18 + sin18);

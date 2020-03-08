@@ -16,9 +16,7 @@ function setUpFaces (size,units='px') {
 	[hexCorner, 100],
 	[0,50] 
 	];
-	this.style.width = hexWidth + units;	
-	this.style.height = size[0] + units;
-	
+
 	const shapeStyle = {
 		"width" : `${hexWidth}${units}`,
         "height" : `${size[0]}${units}`,

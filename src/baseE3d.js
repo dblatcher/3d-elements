@@ -42,14 +42,6 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
 
 };
 
-function setTransformWithAllPrefixes (targetElement,value) {
-    targetElement.style.webkitTransform = value;
-    targetElement.style.MozTransform = value;
-    targetElement.style.msTransform = value;
-    targetElement.style.OTransform = value;
-    targetElement.style.transform = value;
-};	
-
 
 function applySVG (face, points) {
     face.setAttribute('e3d-face-with-svg','true')
@@ -120,9 +112,6 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
             classRule: 'all',
             addContentToFace:parameters.addContentToFace
         };
-    
-        target.style.width = "" + target.arg.size[0] + target.arg.units;
-        target.style.height = "" + target.arg.size[1] + target.arg.units;
 
         const spin = processSpinOrMove(parameters.spin) 
         const move = processSpinOrMove(parameters.move) 
@@ -146,9 +135,6 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
             addContentToFace:[]
         };
 
-        target.style.width = "" + target.arg.size[0] + target.arg.units;
-        target.style.height = "" + target.arg.size[1] + target.arg.units;
-
         const move = processSpinOrMove(target.getAttribute('move'))
         const spin = processSpinOrMove(target.getAttribute('spin'))
 
@@ -160,4 +146,4 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
     return factory
 }
 
-export {setTransformWithAllPrefixes, applySVG, defineShapeType}
+export {applySVG, defineShapeType}
