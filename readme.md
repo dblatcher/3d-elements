@@ -14,23 +14,23 @@ In the following HTML fragment, the library loaded from the script tag will:
 -the render function will convert all elements with a valid e3d-shape attribute
 -any existing children of the e3d-shape element will become e3d-faces. extra children will be added to ensure the e3d-shape element has the right number of face
 
-<script src='https://unpkg.com/3d-elements'></script>
-<figure e3d-shape="Decagon" size="50 100 50" spin="30 60 10" face-class="e3d-preset-blue">
-    <div>first face</div>
-    <div>
-        <p>second face</p>
-        <p>it has <b>more</b> content</p>
-    </div>
-</figure>
+    <script src='https://unpkg.com/3d-elements'></script>
+    <figure e3d-shape="Decagon" size="50 100 50" spin="30 60 10" face-class="e3d-preset-blue">
+        <div>first face</div>
+        <div>
+            <p>second face</p>
+            <p>it has <b>more</b> content</p>
+        </div>
+    </figure>
 
 ##creating shapes in javascript
 The 'make' object exposes the functions for creating new shapes. Each function returns the e3d-shape element (with the e3d-face element children) which can be appended to the document.
 
-var dodecahedron = e3d.make.Dodecahedron({
+    var dodecahedron = e3d.make.Dodecahedron({
     faceClass:'e3d-preset-black',
     size: [200],
     spin: [0,0,0],
     move: [0,100,0],
     addContentToFace: '<p>This mark-up will be added to each face</p>'
-})
-document.querySelector('div').appendChild(dodecahedron)
+    })
+    document.querySelector('div').appendChild(dodecahedron)
