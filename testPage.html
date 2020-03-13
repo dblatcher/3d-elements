@@ -58,12 +58,20 @@
     </div>
 
     <script>
-        var shape = e3d.make.Octahedron({
-            size: [150,200,80],
-            spin: [45,0,10],
+        var shape = e3d.make.TruncatedCube({
+            size: [200,50],
+            spin: [45,0,215],
             addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
         })
        document.querySelector('div').appendChild(shape)
+
+       shape.style.backgroundColor='rgba(200,20,20,.5)';
+       shape.children[0].style.opacity=".6";
+       shape.children[1].style.opacity=".6";
+       shape.children[2].style.opacity=".6";
+       shape.children[3].style.opacity=".6";
+       shape.children[4].style.opacity=".6";
+       shape.children[5].style.opacity=".6";
 
     //    var decagon = e3d.make.Decagon({
     //         size: [150,80],

@@ -8,11 +8,12 @@ import Icosahedron from './shapes/icosahedron'
 import Octahedron from './shapes/Octahedron'
 import PentagonalTrapezohedron from './shapes/PentagonalTrapezohedron'
 import Tetrahedron from './shapes/Tetrahedron'
+import TruncatedCube from './shapes/truncatedCube'
 
 const make = {
     Cube, Pyramid, Dodecahedron, Cuboid,Decagon,
     Hexagon, Icosahedron, Octahedron, PentagonalTrapezohedron,
-    Tetrahedron
+    Tetrahedron,TruncatedCube
 }
 
 function buildShapesInDom () {
