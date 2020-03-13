@@ -1,4 +1,4 @@
-import * as E3d from '../baseE3d'
+import * as E3d from '../base/baseE3d'
 
 
 const setUpFaces = function(size,units='px') {

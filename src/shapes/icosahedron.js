@@ -1,5 +1,5 @@
-import * as E3d from '../baseE3d'
-import * as faceStyling from './faceStyling'
+import * as E3d from '../base/baseE3d'
+import * as faceStyling from '../base/faceStyling'
 
 function setUpFaces (size,units='px') {
 	let faceStyles = faceStyling.makeList(20)
