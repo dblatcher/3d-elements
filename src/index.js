@@ -37,7 +37,7 @@ function buildShapesInDom () {
     })
 }
 
-if (window) {
+if (typeof window !== 'undefined' && window.onload) {
     window.onload = buildShapesInDom
 }
 
