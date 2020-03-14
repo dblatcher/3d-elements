@@ -3,9 +3,6 @@ import * as faceStyling from '../base/faceStyling'
 
 function setUpFaces (size,units='px') {
     
-    const triangeWidth = Math.sqrt ( size[1]*size[1]*2 )
-    const triangleHeight = triangeWidth * Math.sqrt(3) / 2;
-    
     const trianglePoints = [
         [50,0],
         [100,100],
@@ -24,7 +21,13 @@ function setUpFaces (size,units='px') {
         [0,octagonCorner]
     ]
 
-    const cubeCornerDistance = Math.sqrt(3) * (size[0] - (size[1]*.89) ) *.5
+    const triangleWidth = Math.sqrt ( size[1]*size[1]*2 )
+    const triangleHeight = triangleWidth * Math.sqrt(3) / 2;
+    const tetrahedronHeight = Math.sqrt(2/3) *triangleWidth
+
+    const cubeSide = size[0]  
+    const innerCubeSide = size[0] - (size[1]*2)
+    const innerCubeDiagonal = Math.sqrt(innerCubeSide*innerCubeSide *3)
 
     const shapeStyle = {
         "width" : `${size[0]}${units}`,
@@ -36,6 +39,9 @@ function setUpFaces (size,units='px') {
     let faceStyles = faceStyling.makeList(14)
     
     let f
+    let mysteriousAdjustment = ( -triangleHeight * .1325) 
+    let transformString
+    let turn 
     for ( f=0; f<6; f++) {
         faceStyles[f].width = "" + size[0] + units;
         faceStyles[f].height = "" + size[0] + units;
@@ -49,28 +55,32 @@ function setUpFaces (size,units='px') {
     faceStyles[4].transform =`rotateY(270deg) translateZ(${size[0]/2}${units})`;
     faceStyles[5].transform =`rotateY(180deg) translateZ(${size[0]/2}${units})`;
 
-    let transformString
+
+
     for (f=6; f<14; f++) {
-        faceStyles[f].width = "" + triangeWidth + units;
+        faceStyles[f].width = "" + triangleWidth + units;
         faceStyles[f].height = "" + triangleHeight + units;
         
         transformString = '';
-        transformString += `translateX(${size[0]/2 - size[1]/2}${units})`
-        transformString += `translateY(${size[0]/2 - triangleHeight/2}${units})`
-
-        if (f === 6) {
-            transformString += `rotateX(47deg) rotateY(35deg) rotateZ(30deg)`
-            transformString += `translateZ(${cubeCornerDistance}${units})`
-        }else {
-            faceStyles[f]["visibility"] ="hidden" 
+        transformString += `translateX(${cubeSide/2 - triangleWidth/2}${units}) `
+        transformString += `translateY(${cubeSide/2 - triangleHeight/2}${units}) `
+        //triangle at center
+        
+        turn = 45 + ((f-6)*90)
+        if (f > 9 ) {
+            turn = 45 + ((f-10)*90)
+            transformString += `rotateY(${180}deg) `
         }
-
+        
+        transformString += `rotateZ(${turn}deg) `
+        transformString += `rotateX(${56}deg) `
+        transformString += `translateZ(${innerCubeDiagonal/2}${units}) `
+        transformString += `translateZ(${tetrahedronHeight}${units}) ` 
+        transformString += `translateY(${mysteriousAdjustment}${units}) `
         faceStyles[f].transform = transformString
         E3d.applySVG(this.children[f],trianglePoints)
     }
     
-
-
     faceStyling.apply(this, faceStyles, shapeStyle)
 };
 

@@ -36,7 +36,7 @@
 
     <div style="perspective: 10000px;">
         <figure e3d-shape="Cube"
-        size="100 100 100"
+        size="25 25 25"
         spin="270 270 0"
         face-class="red">
             <div class="blue">Can this be folded?</div>
@@ -45,8 +45,8 @@
             <div class="preset-e3d-black">3</div>
         </figure>
 
-        <figure e3d-shape="Cube"
-        size="100 100 100"
+        <figure e3d-shape="Cuboid"
+        size="20 100 100"
         spin="30 60 10"
         move="100 100 100"
         face-class="center blue">
@@ -59,19 +59,20 @@
 
     <script>
         var shape = e3d.make.TruncatedCube({
-            size: [200,50],
-            spin: [45,0,215],
-            addContentToFace: [e3d.presets.numbered, e3d.presets.checkered]
+            size: [100,20],
+            spin: [55,0,65],
+            addContentToFace: [e3d.presets.numbered, e3d.presets.allGreen]
         })
        document.querySelector('div').appendChild(shape)
+    
+       var shape2 = e3d.make.Decagon({
+            size: [100,50],
+            spin: [55,0,65],
+            addContentToFace: [e3d.presets.numbered, e3d.presets.allBlack]
+        })
+       document.querySelector('div').appendChild(shape2)
 
-       shape.style.backgroundColor='rgba(200,20,20,.5)';
-       shape.children[0].style.opacity=".6";
-       shape.children[1].style.opacity=".6";
-       shape.children[2].style.opacity=".6";
-       shape.children[3].style.opacity=".6";
-       shape.children[4].style.opacity=".6";
-       shape.children[5].style.opacity=".6";
+
 
     //    var decagon = e3d.make.Decagon({
     //         size: [150,80],
