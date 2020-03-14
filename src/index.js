@@ -6,6 +6,8 @@ if (typeof window !== 'undefined') {
     window.onload = buildShapesInDom
 }
 
+import * as t from '../testing/transformStack'
+
 export {
-    make,presets, buildShapesInDom
+    make,presets, buildShapesInDom, t
 }
