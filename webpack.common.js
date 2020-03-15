@@ -6,7 +6,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: '3d-elements.js',
         library: 'e3d',
-        libraryTarget: 'this',
+        libraryTarget: 'umd',
     },
     module: {
         rules: [

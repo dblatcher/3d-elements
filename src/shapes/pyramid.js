@@ -1,5 +1,6 @@
-import * as E3d from '../baseE3d'
-import * as faceStyling from './faceStyling'
+import * as faceStyling from '../base/faceStyling'
+import * as E3d from '../base/baseE3d'
+
 
 const setUpFaces = function(size,units='px') {
     var faces = this.children;
