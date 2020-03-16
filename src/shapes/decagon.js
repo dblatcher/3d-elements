@@ -33,17 +33,13 @@ function setUpFaces(size,units='px') {
     }
     let faceStyles = faceStyling.makeList(12)
 
-	
-	this.style.width = decFaceWidth + units;	
-	this.style.height = size[0] + units;
-	
 	faceStyles[0].width  = decFaceWidth + units;	
 	faceStyles[0].height = size[0] + units;
 	transformString = '';
 	transformString += 'translateZ(' + size[1]/2 + units +')'
 	faceStyles[0].transform = transformString
 	
-	E3d.applySVG(faces[0],clipArray);
+	faceStyling.prependSvg(faces[0],clipArray);
 	
 	
 	
@@ -66,7 +62,7 @@ function setUpFaces(size,units='px') {
 	faceStyles[11].width  = decFaceWidth + units;	
 	faceStyles[11].height = size[0] + units;
 	faceStyles[11].transform = "rotateY(180deg) translateZ(" + size[1]/2 + units + ")"
-	E3d.applySVG(faces[11],clipArray);
+	faceStyling.prependSvg(faces[11],clipArray);
 	
 	faceStyling.apply(this, faceStyles, shapeStyle)
 

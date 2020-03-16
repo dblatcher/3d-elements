@@ -33,8 +33,6 @@ function setUpFaces (size,units='px') {
         "width" : `${size[0]}${units}`,
         "height" : `${size[0]}${units}`,
     }
-    this.style.width = size[0] + units;
-	this.style.height = size[0] + units;
 
     let faceStyles = faceStyling.makeList(14)
     
@@ -45,7 +43,7 @@ function setUpFaces (size,units='px') {
     for ( f=0; f<6; f++) {
         faceStyles[f].width = "" + size[0] + units;
         faceStyles[f].height = "" + size[0] + units;
-        E3d.applySVG(this.children[f],octagonPoints)
+        faceStyling.prependSvg(this.children[f],octagonPoints)
     }
 
     faceStyles[0].transform =`translateZ(${size[0]/2}${units})`;
@@ -65,20 +63,20 @@ function setUpFaces (size,units='px') {
         transformString += `translateX(${cubeSide/2 - triangleWidth/2}${units}) `
         transformString += `translateY(${cubeSide/2 - triangleHeight/2}${units}) `
         //triangle at center
-        
+
         turn = 45 + ((f-6)*90)
         if (f > 9 ) {
             turn = 45 + ((f-10)*90)
             transformString += `rotateY(${180}deg) `
         }
-        
+
         transformString += `rotateZ(${turn}deg) `
         transformString += `rotateX(${56}deg) `
         transformString += `translateZ(${innerCubeDiagonal/2}${units}) `
         transformString += `translateZ(${tetrahedronHeight}${units}) ` 
         transformString += `translateY(${mysteriousAdjustment}${units}) `
         faceStyles[f].transform = transformString
-        E3d.applySVG(this.children[f],trianglePoints)
+        faceStyling.prependSvg(this.children[f],trianglePoints)
     }
     
     faceStyling.apply(this, faceStyles, shapeStyle)

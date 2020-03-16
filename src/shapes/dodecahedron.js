@@ -16,11 +16,8 @@ function setUpFaces (size,units='px') {
     var pentSide = 2*sin36 * pentRadius
     var pentHeight  = pentWidth * ((sin72+sin36) / (2*sin54)); 
     var pentCord = pentHeight-pentRadius;
-    
-        
-    this.style.width = pentWidth + units;
-    this.style.height = (pentHeight*2) + units;
-    
+
+
     const dihedral = 116.56505;
     var v = sin36 / (sin36 + sin72);
     var h = sin18 / (1 + sin18 + sin18);
@@ -37,7 +34,7 @@ function setUpFaces (size,units='px') {
     for (var i=0; i < 12; i++){
         faceStyles[i]["width"] = pentWidth + units;
         faceStyles[i]["height"] = pentHeight + units;
-        E3d.applySVG(faces[i],[ [50,0],[100,100*v],[100*(1-h),100],[h*100,100],[0,100*v] ]);
+        faceStyling.prependSvg(faces[i],[ [50,0],[100,100*v],[100*(1-h),100],[h*100,100],[0,100*v] ]);
         faceStyles[i]["text-align"]="center";
         faceStyles[i]["padding-top"]=  20 + '%';		
         faceStyles[i]["padding-left"] = (h*100) + '%';		

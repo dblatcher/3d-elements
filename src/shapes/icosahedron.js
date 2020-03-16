@@ -11,10 +11,7 @@ function setUpFaces (size,units='px') {
 	const inscribed = triangleSide * 0.7557613141;
 	const dihedral = 138.19; 
 
-	//todo - remove when not setting inline in base
-	this.style.width = triangleSide + units;
-	this.style.height = (triangleHeight*2.5) + units;
-	
+
     const shapeStyle = {
         "width" : `${triangleSide}${units}`,
         "height" : `${triangleHeight*2.5}${units}`,
@@ -25,7 +22,7 @@ function setUpFaces (size,units='px') {
 		faceStyles[i].height = triangleHeight + units;
 		faceStyles[i]['text-align'] ="center";
 		faceStyles[i]['padding']='5% 25% 40% 25%';
-		E3d.applySVG(faces[i],[ [50,100],[100,0],[0,0] ]);
+		faceStyling.prependSvg(faces[i],[ [50,100],[100,0],[0,0] ]);
 	}
 
 	var startTransform = '';

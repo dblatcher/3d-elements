@@ -1,3 +1,4 @@
+import * as faceStyling from '../base/faceStyling'
 import * as E3d from '../base/baseE3d'
 
 function setUpFaces (size,units='px') {
@@ -21,24 +22,26 @@ function setUpFaces (size,units='px') {
 	angle2 = angle2*(180/Math.PI);
 	console.log(angle2);
 	*/
-	
-	this.style.width = kiteWidth + units;
-	this.style.height = kiteHeight + units;
-	
+
+	let faceStyles = faceStyling.makeList(10)
+    const shapeStyle = {
+        "width" : `${kiteWidth}${units}`,
+        "height" : `${kiteHeight}${units}`,
+    }
+
 	for (var i=0; i<10; i++){
-		faces[i].style.width = kiteWidth + units;
-		faces[i].style.height = kiteHeight + units;
-		faces[i].style.textAlign="center";
-		faces[i].style.paddingLeft='25%';		
-		faces[i].style.paddingRight='25%';		
-		E3d.applySVG(faces[i],[ [50,0],[100,kiteRatio],[50,100],[0,kiteRatio] ]);
-		faces[i].style.paddingTop ='40%';	
-		
+
+		faceStyles[i].width = kiteWidth + units;
+        faceStyles[i].height = kiteHeight + units;
+        faceStyles[i]["text-align"] = "center";
+        faceStyles[i]["padding-left"] = '25%';        
+        faceStyles[i]["padding-right"]='25%';        
+        faceStyles[i]["padding-top"]='40%';   
+
 		transformString = '';
 		transformString += 'translateY(' + (-kiteHeight*adjust/2) + units + ')';
 		if (i < 5) {
 			transformString += 'rotateY(' + (angle1*i) + 'deg)';
-			faces[i].style.opacity='1';
 		} else {
 			transformString += 'rotateZ(' + 180 + 'deg)';
 			transformString += 'translateY(' + (-kiteHeight*adjust) + units + ')';
@@ -46,8 +49,12 @@ function setUpFaces (size,units='px') {
 		};
 		transformString += 'translateZ(' + -kiteWidth*shift + units +')';
 		transformString += 'rotateX(' + -angle2 + 'deg)';
-		E3d.setTransformWithAllPrefixes(faces[i],transformString);
+		
+        faceStyles[i]["transform"] = transformString
+		faceStyling.prependSvg(faces[i],[ [50,0],[100,kiteRatio],[50,100],[0,kiteRatio] ]);
 	};
+
+	faceStyling.apply(this, faceStyles, shapeStyle)
 };
 
 export default E3d.defineShapeType('pentagonalTrapezohedron',10, setUpFaces)
