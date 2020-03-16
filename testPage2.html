@@ -17,7 +17,6 @@
             fill:skyblue;
             text-align: center;
         }
-
         .center {
             display: flex;
             justify-content: center;
@@ -42,21 +41,22 @@
 
             <div>
                 <figure e3d-shape="Hexagon" id="rod"
-                size="40 280"
-                spin="0 0 0"
-                face-class="blue">
+                size=".5 12" units="em"
+                spin="10 0 0"
+                face-class="blue center">
 
                     <div>
                         <figure e3d-shape="TruncatedCube"
-                        size="60 20"
+                        size="5 2"
                         spin="0 0 0"
+                        units="em"
                         face-class="red">
                         <div></div>
                         <div></div>
                         <div>
-                            <figure e3d-shape="Hexagon" id="rod"
-                            size="40 180"
-                            move="0 0 90"
+                            <figure e3d-shape="Hexagon" style="position:absolute; left:50%;top:50%;"
+                            size=".5 22" units="em"
+                            move="0 0 11"
                             spin="0 0 0"
                             face-class="blue">
                         </div>

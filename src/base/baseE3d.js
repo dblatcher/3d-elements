@@ -43,8 +43,6 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
 };
 
 
-
-
 function processSize(input) {
     let size = input  || [100,100,100];
     if (typeof(size) === 'string') {size = size.trim().split(' ')};
@@ -56,6 +54,20 @@ function processSpinOrMove (input) {
     let output = input  || [0,0,0];
     if (typeof(output) === 'string') {output = output.trim().split(' ')};
     return output
+}
+
+function processUnits(input) {
+    if (!input) {return 'px'}
+    const validUnits= ['cm', 'mm','Q','in','pc','pt','px','em','ex','ch','rem','lh', 'vw', 'vh','vmin','vmax']
+    if (validUnits.includes(input)) {return input}
+    return 'px'
+}
+
+function processFaceClass(input) {
+    if (!input) {return []}
+    if (typeof(input) === 'string'){return input.trim().split(" ")};
+    if (Array.isArray(input)) return input
+    return []
 }
 
 function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
@@ -81,14 +93,11 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
     let factory = function (parameters={}) {
         let target= document.createElement('figure')
-            
-        let faceClass = parameters.faceClass  || [];
-        if (typeof(faceClass) === 'string'){faceClass = faceClass.trim().split(" ")};
-        
+                    
         target.arg = {
             size: processSize(parameters.size),
-            units:parameters.units  ||'px',
-            faceClass,
+            units: processUnits(parameters.units),
+            faceClass: processFaceClass(parameters.faceClass),
             classRule: 'all',
             addContentToFace:parameters.addContentToFace
         };
@@ -102,15 +111,10 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
     }
 
     factory.fromDom = function(target) {
-        let faceClass = target.getAttribute('face-class') || [];
-        if (typeof(faceClass) === 'string'){faceClass = faceClass.trim().split(" ")};
-
-        const size = processSize(target.getAttribute('size'))
-
         target.arg =  {
-            size,
-            units: 'px',
-            faceClass,
+            size: processSize(target.getAttribute('size')),
+            units: processUnits(target.getAttribute('units')),
+            faceClass: processFaceClass(target.getAttribute('face-class')),
             classRule: 'blank',
             addContentToFace:[]
         };
@@ -119,6 +123,7 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
         const spin = processSpinOrMove(target.getAttribute('spin'))
 
         initShape(target,move,spin)
+        return target
     }
 
     factory.shapeName = name
