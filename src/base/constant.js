@@ -1,7 +1,7 @@
 function ConstantSpinner (target) {
 
     let timerIndex
-    const turnVector = {x:0, y:1, z:-5}
+    const turnVector = {x:0, y:0, z:1}
 
     function turn () {
         target.spin = {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <style>
+        .red {
+            border: 1px solid red;
+            background-color: pink;
+            fill:pink;
+            text-align: center;
+            stroke: red;
+            stroke-width: 1px;
+        }
+        .blue {
+            border: 1px solid blue;
+            background-color: skyblue;
+            fill:skyblue;
+            text-align: center;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+    <script src='dist/3d-elements.js'></script>
+
+
+    <h1>This is a using dist</h1>
+    <p>This is a paragraph.</p>
+
+    <div style="perspective: 10000px;">
+        <figure e3d-shape="Dodecahedron"
+        size="100"
+        spin="0 60 0"
+        face-class="red">
+
+            <div>
+                <figure e3d-shape="Hexagon" id="rod"
+                size="40 280"
+                spin="0 0 0"
+                face-class="blue">
+
+                    <div>
+                        <figure e3d-shape="TruncatedCube"
+                        size="60 20"
+                        spin="0 0 0"
+                        face-class="red">
+                        <div></div>
+                        <div></div>
+                        <div>
+                            <figure e3d-shape="Hexagon" id="rod"
+                            size="40 180"
+                            move="0 0 90"
+                            spin="0 0 0"
+                            face-class="blue">
+                        </div>
+                        </figure>
+                    </div>
+
+                </figure>
+            </div>
+
+
+        </figure>
+
+
+    </div>
+
+    <script>
+
+        var rod = document.querySelector('#rod')
+        function turn() {
+           //
+            rod.constant.go()
+        }
+
+    </script>
+
+</body>
+</html>
