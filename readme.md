@@ -21,7 +21,7 @@ In the following HTML fragment, the library loaded from the script tag will:
     <figure e3d-shape="Decagon" 
     size="50 100 50" 
     spin="30 60 10" 
-    face-class="e3d-preset-blue">
+    face-class=""preset-e3d-green preset-e3d-numbered"">
         <div>first face</div>
         <div>
             <p>second face</p>
@@ -41,3 +41,15 @@ The 'make' object exposes the functions for creating new shapes. Each function r
     })
     document.querySelector('div').appendChild(dodecahedron)
 
+## supported shapes
+* Cube
+* Pyramid
+* Dodecahedron
+* Cuboid
+* Decagon
+* Hexagon
+* Icosahedron
+* Octahedron
+* PentagonalTrapezohedron
+* Tetrahedron
+* TruncatedCube
