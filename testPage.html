@@ -34,7 +34,7 @@
     <h1>This is a using dist</h1>
     <p>This is a paragraph.</p>
 
-    <div style="perspective: 10000px;">
+    <div id='frame' style="perspective: 10000px;">
         <figure e3d-shape="Cube"
         size="25 25 25"
         spin="270 270 0"
@@ -59,26 +59,35 @@
 
     <script>
         var shape = e3d.make.TruncatedCube({
-            size: [100,50],
+            size: [160,50],
             spin: [55,0,65],
-            faceContent: [e3d.presets.numbered, e3d.presets.allGreen]
+            move: [100,150,0],
+            faceContent: [e3d.presets.numbered, e3d.presets.allGreen],
+            faceClass: ['preset-e3d-svg-pointer']
         })
-       document.querySelector('div').appendChild(shape)
+       document.querySelector('#frame').appendChild(shape)
     
        var shape2 = e3d.make.Decagon({
-            size: [100,50],
+            size: [160,30],
             spin: [55,0,65],
             faceContent: ['text', e3d.presets.allBlack]
         })
-       document.querySelector('div').appendChild(shape2)
+       document.querySelector('#frame').appendChild(shape2)
 
-       var face = shape.children[1]
-       console.log(face, face.pointerTarget)
+
+       var face;
+       var makeHandler = function (face) {
+            return function (event){
+                console.log(face.getAttribute('e3d-face'))
+            }    
+        }
        
-       face.pointerTarget.addEventListener('click', function(event){
-            console.log(event.target)
-            console.log(face.innerText)
-       })
+       for (var i = 0; i < shape.childElementCount-1; i++) {
+            face = shape.children[i]
+            face.pointerTarget.addEventListener('click', makeHandler(face))
+        }
+            
+
 
         var t = document.querySelector('figure')
 

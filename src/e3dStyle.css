@@ -32,6 +32,18 @@
     stroke-width: 1px;
 }
 
+.preset-e3d-svg-pointer[e3d-face-with-svg] {
+    pointer-events: none;
+}
+
+.preset-e3d-svg-pointer[e3d-face-with-svg] *:not(path){
+    pointer-events: none;
+}
+
+.preset-e3d-svg-pointer[e3d-face-with-svg] svg path {
+    cursor: pointer;
+}
+
 [e3d-shape] {
     transform-style: preserve-3d;
     margin: 0;
@@ -59,3 +71,6 @@
     top: 0px;
 }
 
+[e3d-svg] path {
+    pointer-events: auto;
+}
