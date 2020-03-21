@@ -37,7 +37,7 @@ The 'make' object exposes the functions for creating new shapes. Each function r
     size: [200],
     spin: [0,0,0],
     move: [0,100,0],
-    addContentToFace: '<p>This mark-up will be added to each face</p>'
+    faceContent: '<p>This mark-up will be added to each face</p>'
     })
     document.querySelector('div').appendChild(dodecahedron)
 

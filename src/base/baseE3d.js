@@ -6,7 +6,7 @@ import faceProperties from './faceProperties'
 let hashNumber = 100
 
 function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
-    const {faceClass, classRule, addContentToFace} = parentShape.arg
+    const {faceClass, classRule, faceContent} = parentShape.arg
     let createdFaceIndeces = [], f, face;
 
     // create the face if there is not an existing child element
@@ -17,7 +17,7 @@ function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
         }
     }
 
-    const contentArray = Array.isArray(addContentToFace) ? addContentToFace : [addContentToFace]
+    const contentArray = Array.isArray(faceContent) ? faceContent : [faceContent]
     for (f=0; f<numberOfFaces; f++) {
         face = parentShape.children[f]
 
@@ -111,7 +111,7 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
             units: processUnits(parameters.units),
             faceClass: processFaceClass(parameters.faceClass),
             classRule: 'all',
-            addContentToFace:parameters.addContentToFace
+            faceContent:parameters.faceContent
         };
 
         const spin = processSpinOrMove(parameters.spin) 
@@ -128,7 +128,7 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
             units: processUnits(target.getAttribute('units')),
             faceClass: processFaceClass(target.getAttribute('face-class')),
             classRule: 'blank',
-            addContentToFace:[]
+            faceContent:[]
         };
 
         const move = processSpinOrMove(target.getAttribute('move'))

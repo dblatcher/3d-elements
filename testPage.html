@@ -61,37 +61,19 @@
         var shape = e3d.make.TruncatedCube({
             size: [100,20],
             spin: [55,0,65],
-            addContentToFace: [e3d.presets.numbered, e3d.presets.allGreen]
+            faceContent: [e3d.presets.numbered, e3d.presets.allGreen]
         })
        document.querySelector('div').appendChild(shape)
     
        var shape2 = e3d.make.Decagon({
             size: [100,50],
             spin: [55,0,65],
-            addContentToFace: ['text', e3d.presets.allBlack]
+            faceContent: ['text', e3d.presets.allBlack]
         })
        document.querySelector('div').appendChild(shape2)
 
-        //shape2.children[0].innerText='click me'
-
-    //    var decagon = e3d.make.Decagon({
-    //         size: [150,80],
-    //         spin: [45,0,10],
-    //         addContentToFace: [e3d.presets.checkered]
-    //     })
-    //    document.querySelector('div').appendChild(decagon)
-
-    //     var dodecahedron = e3d.make.Dodecahedron({
-    //         faceClass:'red center',
-    //         size: [200],
-    //         spin: [0,0,0],
-    //         move: [0,100,0],
-    //         addContentToFace: '<p>dodecahedron</p>'
-    //     })
-    //     document.querySelector('div').appendChild(dodecahedron)
-
         var t = document.querySelector('figure')
-        //e3d.make.Cube.fromDom(t)
+
     </script>
 
 </body>
