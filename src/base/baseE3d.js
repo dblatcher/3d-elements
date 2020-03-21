@@ -1,44 +1,56 @@
 import {GradualMover} from './gradual'
 import {ConstantSpinner} from './constant'
 import * as propertyMethods from './propertyMethods';
+import faceProperties from './faceProperties'
 
 let hashNumber = 100
 
 function putRightNumberOfFacesOn (parentShape, numberOfFaces) {
-    var faceClass = parentShape.arg.faceClass;
-    var classRule = parentShape.arg.classRule;
-    var addContentToFace = parentShape.arg.addContentToFace;
-    
-    for (var f=0; f<numberOfFaces; f++) {
+    const {faceClass, classRule, addContentToFace} = parentShape.arg
+    let createdFaceIndeces = [], f, face;
+
+    // create the face if there is not an existing child element
+    for (f=0; f<numberOfFaces; f++) {
         if (parentShape.childElementCount <= f ) {
             parentShape.appendChild(document.createElement('div'));
-            if (typeof(addContentToFace) === 'function') {
-                addContentToFace(parentShape.children[f],f)
-            }
-            else if (typeof(addContentToFace) === 'string') {
-                parentShape.children[f].innerHTML = addContentToFace;
-            }
-            else if (Array.isArray(addContentToFace)) {
-                addContentToFace.forEach(rule => {
-                    if (typeof(rule) === 'function') {
-                        rule(parentShape.children[f],f)
-                    }
-                    else if (typeof(rule) === 'string') {
-                        parentShape.children[f].innerHTML += rule;
-                    }
-                })
-            }
+            createdFaceIndeces.push (f)
         }
-        parentShape.children[f].setAttribute('e3d-face',f.toString())
+    }
+
+    const contentArray = Array.isArray(addContentToFace) ? addContentToFace : [addContentToFace]
+    for (f=0; f<numberOfFaces; f++) {
+        face = parentShape.children[f]
+
+        // add content to the created faces only 
+        if (createdFaceIndeces.includes(f)) {
+            contentArray.forEach(rule => {
+                if (typeof(rule) === 'function') {
+                    rule(face,f)
+                }
+                else if (typeof(rule) === 'string') {
+                    face.innerHTML += rule;
+                }
+            }) 
+        }
+        
+        // add e3d-face attribute
+        face.setAttribute('e3d-face',f.toString())
+        
+        //apply classRule
         if (
         (classRule == 'all') ||
-        (classRule == 'blank' &&  parentShape.children[f].classList.length == 0 )
+        (classRule == 'blank' &&  face.classList.length == 0 )
         ){
             faceClass.forEach(function(fc){
-                parentShape.children[f].classList.add(fc)
+                face.classList.add(fc)
             })
         };
-    };
+        
+        //attach properties
+        Object.defineProperties(face,faceProperties)
+    }
+        
+ 
 
 };
 
