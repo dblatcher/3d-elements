@@ -53,7 +53,7 @@
 [e3d-svg] {
     fill: inherit;
     z-index:-1;
-    pointer-events: none;
+    pointer-events: auto;
     position:absolute;
     left: 0px;
     top: 0px;

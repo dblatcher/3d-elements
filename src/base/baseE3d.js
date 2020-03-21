@@ -85,11 +85,11 @@ function processFaceClass(input) {
 function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
     function initShape (target, move, spin) {
+        target.setAttribute('e3d-shape',name)
         target.setAttribute('hash',hashNumber++)
         putRightNumberOfFacesOn(target,numberOfFaces)
         target.setUpFaces = setUpFacesFunction;
         target.setUpFaces(target.arg.size, target.arg.units)
-        target.setAttribute('e3d-shape',name)
 
         const {units} = target.arg
 

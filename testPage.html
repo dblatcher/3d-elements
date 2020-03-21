@@ -59,7 +59,7 @@
 
     <script>
         var shape = e3d.make.TruncatedCube({
-            size: [100,20],
+            size: [100,50],
             spin: [55,0,65],
             faceContent: [e3d.presets.numbered, e3d.presets.allGreen]
         })
@@ -71,6 +71,14 @@
             faceContent: ['text', e3d.presets.allBlack]
         })
        document.querySelector('div').appendChild(shape2)
+
+       var face = shape.children[1]
+       console.log(face, face.pointerTarget)
+       
+       face.pointerTarget.addEventListener('click', function(event){
+            console.log(event.target)
+            console.log(face.innerText)
+       })
 
         var t = document.querySelector('figure')
 

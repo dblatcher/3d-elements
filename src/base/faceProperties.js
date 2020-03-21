@@ -39,7 +39,7 @@ const pointerTarget = {
         let i
         for (i=0; i<this.childElementCount; i++) {
             if (this.children[i].getAttribute('e3d-svg')) {
-                return this.children[i]
+                return this.children[i].children[0]
             }
         }
         return this
