@@ -79,6 +79,9 @@
     filter: brightness(1.2);
 }
 
+[e3d-hide-until-folded] {
+    visibility: hidden;
+}
 
 [e3d-shape] {
     transform-style: preserve-3d;

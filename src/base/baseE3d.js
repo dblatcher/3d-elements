@@ -135,6 +135,7 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
         const spin = processSpinOrMove(target.getAttribute('spin'))
 
         initShape(target,move,spin)
+        target.removeAttribute('e3d-hide-until-folded')
         return target
     }
 
