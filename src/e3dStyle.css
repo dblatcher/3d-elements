@@ -1,3 +1,10 @@
+.preset-e3d-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150%;
+}
+
 .preset-e3d-green {
     fill: lightgreen;
     background-color: lightgreen;
@@ -7,18 +14,38 @@
     color: green;
 }
 
-.preset-e3d-numbered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 200%;
+.preset-e3d-blue {
+    fill: lightblue;
+    background-color: lightblue;
+    border: 1px solid blue;
+    stroke: blue;
+    stroke-width: 1px;
+    color: blue;
+}
+
+.preset-e3d-yellow {
+    fill: lightyellow;
+    background-color: lightyellow;
+    border: 1px solid yellow;
+    stroke: yellow;
+    stroke-width: 1px;
+    color: yellow;
+}
+
+.preset-e3d-red {
+    fill: indianred;
+    background-color: indianred;
+    border: 1px solid red;
+    stroke: red;
+    stroke-width: 1px;
+    color: red;
 }
 
 .preset-e3d-black {
     border: 1px solid black;
-    background-color: gray;
+    background-color: darkgrey;
     text-align: center;
-    fill:gray;
+    fill:darkgrey;
     stroke:black;
     stroke-width: 1px;
 }
@@ -43,6 +70,15 @@
 .preset-e3d-svg-pointer[e3d-face-with-svg] svg path {
     cursor: pointer;
 }
+
+.preset-e3d-svg-pointer:not([e3d-face-with-svg]) {
+    cursor: pointer;
+}
+
+.preset-e3d-hover:hover {
+    filter: brightness(1.2);
+}
+
 
 [e3d-shape] {
     transform-style: preserve-3d;

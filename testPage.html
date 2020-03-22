@@ -63,14 +63,15 @@
             spin: [55,0,65],
             move: [100,150,0],
             faceContent: [e3d.presets.numbered, e3d.presets.allGreen],
-            faceClass: ['preset-e3d-svg-pointer']
+            faceClass: ['preset-e3d-svg-pointer', 'preset-e3d-hover']
         })
        document.querySelector('#frame').appendChild(shape)
     
        var shape2 = e3d.make.Decagon({
             size: [160,30],
             spin: [55,0,65],
-            faceContent: ['text', e3d.presets.allBlack]
+            faceContent: ['text'],
+            faceClass: ['preset-e3d-centered','preset-e3d-red','preset-e3d-svg-pointer', 'preset-e3d-hover']
         })
        document.querySelector('#frame').appendChild(shape2)
 
