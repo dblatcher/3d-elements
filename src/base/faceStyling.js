@@ -47,7 +47,7 @@ function apply(target, faceStyles, shapeStyle = null) {
     target.appendChild(style);
 }
 
-function prependSvg (face, points) {
+function prependSvg (face, points, pattern=null, size=[100,100]) {
     face.setAttribute('e3d-face-with-svg','true')
     let pathString = '';   
 
@@ -64,7 +64,14 @@ function prependSvg (face, points) {
     svgElement.setAttributeNS('','preserveAspectRatio','none');
     svgElement.setAttribute('e3d-svg','true');
 
-    svgElement.innerHTML = `<path d="${pathString}"/>`
+
+    if (pattern) {
+        const imageAspect = 74/49;
+        const faceAspect = size[0]/size[1]
+        svgElement.innerHTML += `<path  x="0" y="0" d="${pathString}" fill="url(${pattern})"/>`
+    } else {
+        svgElement.innerHTML += `<path d="${pathString}" />`
+    } 
     
     if (face.firstChild) {
         face.insertBefore (svgElement, face.firstChild)
