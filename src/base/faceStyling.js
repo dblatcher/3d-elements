@@ -47,7 +47,7 @@ function apply(target, faceStyles, shapeStyle = null) {
     target.appendChild(style);
 }
 
-function prependSvg (face, points, pattern=null, size=[100,100]) {
+function prependSvg (face, points, faceIndex, pattern=null) {
     face.setAttribute('e3d-face-with-svg','true')
     let pathString = '';   
 
@@ -66,9 +66,17 @@ function prependSvg (face, points, pattern=null, size=[100,100]) {
 
 
     if (pattern) {
-        const imageAspect = 74/49;
-        const faceAspect = size[0]/size[1]
-        svgElement.innerHTML += `<path  x="0" y="0" d="${pathString}" fill="url(${pattern})"/>`
+        let patternValue;
+        if (typeof pattern === 'string') {
+            patternValue = pattern
+        }
+        else if(typeof pattern === 'function') {
+            patternValue = pattern(face, faceIndex)
+        }
+
+        svgElement.innerHTML +=  typeof patternValue === 'string' ?
+        `<path  x="0" y="0" d="${pathString}" fill="url(${patternValue})"/>` :
+        `<path d="${pathString}" />`;
     } else {
         svgElement.innerHTML += `<path d="${pathString}" />`
     } 

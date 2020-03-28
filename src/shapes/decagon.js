@@ -1,7 +1,7 @@
 import * as E3d from '../base/baseE3d'
 import * as faceStyling from '../base/faceStyling'
 
-function setUpFaces(size,units='px') {
+function setUpFaces(size, units='px', facePattern=null) {
 
 
 
@@ -39,7 +39,7 @@ function setUpFaces(size,units='px') {
 	transformString += 'translateZ(' + size[1]/2 + units +')'
 	faceStyles[0].transform = transformString
 	
-	faceStyling.prependSvg(faces[0],clipArray);
+	faceStyling.prependSvg(faces[0],clipArray, 0, facePattern);
 	
 	
 	
@@ -62,7 +62,7 @@ function setUpFaces(size,units='px') {
 	faceStyles[11].width  = decFaceWidth + units;	
 	faceStyles[11].height = size[0] + units;
 	faceStyles[11].transform = "rotateY(180deg) translateZ(" + size[1]/2 + units + ")"
-	faceStyling.prependSvg(faces[11],clipArray);
+	faceStyling.prependSvg(faces[11],clipArray, 11, facePattern);
 	
 	faceStyling.apply(this, faceStyles, shapeStyle)
 

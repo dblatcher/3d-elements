@@ -1,7 +1,7 @@
 import * as E3d from '../base/baseE3d'
 import * as faceStyling from '../base/faceStyling'
 
-function setUpFaces (size,units='px') {
+function setUpFaces (size, units='px', facePattern=null) {
 			
     const shapeStyle = {
 		"width" : `${size[0]}${units}`,

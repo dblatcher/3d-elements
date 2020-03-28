@@ -82,6 +82,13 @@ function processFaceClass(input) {
     return []
 }
 
+function processFacePattern(input) {
+    if (!input) {return null}
+    if (typeof input === 'string') {return input}
+    if (typeof input === 'function') {return input}
+    return null
+}
+
 function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
 
     function initShape (target, move, spin) {
@@ -89,7 +96,7 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
         target.setAttribute('hash',hashNumber++)
         putRightNumberOfFacesOn(target,numberOfFaces)
         target.setUpFaces = setUpFacesFunction;
-        target.setUpFaces(target.arg.size, target.arg.units)
+        target.setUpFaces(target.arg.size, target.arg.units, target.arg.facePattern)
 
         const {units} = target.arg
 
@@ -111,7 +118,8 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
             units: processUnits(parameters.units),
             faceClass: processFaceClass(parameters.faceClass),
             classRule: 'all',
-            faceContent:parameters.faceContent
+            faceContent:parameters.faceContent,
+            facePattern: processFacePattern(parameters.facePattern)
         };
 
         const spin = processSpinOrMove(parameters.spin) 
@@ -128,7 +136,8 @@ function defineShapeType (name, numberOfFaces, setUpFacesFunction) {
             units: processUnits(target.getAttribute('units')),
             faceClass: processFaceClass(target.getAttribute('face-class')),
             classRule: 'blank',
-            faceContent:[]
+            faceContent:[],
+            facePattern: processFacePattern(target.getAttribute('face-pattern'))
         };
 
         const move = processSpinOrMove(target.getAttribute('move'))

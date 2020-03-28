@@ -1,7 +1,7 @@
 import * as E3d from '../base/baseE3d'
 import * as faceStyling from '../base/faceStyling'
 
-function setUpFaces (size,units='px') {
+function setUpFaces (size,units='px', facePattern=null) {
     
     const trianglePoints = [
         [50,0],
@@ -43,7 +43,7 @@ function setUpFaces (size,units='px') {
     for ( f=0; f<6; f++) {
         faceStyles[f].width = "" + size[0] + units;
         faceStyles[f].height = "" + size[0] + units;
-        faceStyling.prependSvg(this.children[f],octagonPoints)
+        faceStyling.prependSvg(this.children[f],octagonPoints, f, facePattern)
     }
 
     faceStyles[0].transform =`translateZ(${size[0]/2}${units})`;
@@ -76,7 +76,7 @@ function setUpFaces (size,units='px') {
         transformString += `translateZ(${tetrahedronHeight}${units}) ` 
         transformString += `translateY(${mysteriousAdjustment}${units}) `
         faceStyles[f].transform = transformString
-        faceStyling.prependSvg(this.children[f],trianglePoints)
+        faceStyling.prependSvg(this.children[f],trianglePoints, f, facePattern)
     }
     
     faceStyling.apply(this, faceStyles, shapeStyle)

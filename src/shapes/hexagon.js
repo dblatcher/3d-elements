@@ -1,7 +1,7 @@
 import * as E3d from '../base/baseE3d'
 import * as faceStyling from '../base/faceStyling'
 
-function setUpFaces (size,units='px') {
+function setUpFaces (size, units='px', facePattern=null) {
 	var faces = this.children;
 	var transformString;
 	
@@ -28,7 +28,7 @@ function setUpFaces (size,units='px') {
 	transformString = '';
 	transformString += 'translateZ(' + size[1]/2 + units +')'
 	faceStyles[0].transform = transformString
-	faceStyling.prependSvg(faces[0],hexagonalCornerArray);
+	faceStyling.prependSvg(faces[0],hexagonalCornerArray, 0 ,facePattern);
 	
 	for (var f=1;f<7;f++) {	
 		faceStyles[f].width  = size[0]/Math.pow(3,1/2)  + units;		
@@ -47,7 +47,7 @@ function setUpFaces (size,units='px') {
 	faceStyles[7].width  = hexWidth + units;		
 	faceStyles[7].height = size[0] + units;
 	faceStyles[7].transform = "rotateY(180deg) translateZ(" + size[1]/2 + units + ")";
-	faceStyling.prependSvg(faces[7],hexagonalCornerArray);
+	faceStyling.prependSvg(faces[7],hexagonalCornerArray, 7, facePattern);
 	
 	faceStyling.apply(this, faceStyles, shapeStyle)
 };

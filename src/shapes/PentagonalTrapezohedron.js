@@ -1,7 +1,7 @@
 import * as faceStyling from '../base/faceStyling'
 import * as E3d from '../base/baseE3d'
 
-function setUpFaces (size,units='px') {
+function setUpFaces (size, units='px', facePattern=null) {
 	var faces = this.children;		
 	var transformString;
 
@@ -51,7 +51,7 @@ function setUpFaces (size,units='px') {
 		transformString += 'rotateX(' + -angle2 + 'deg)';
 		
         faceStyles[i]["transform"] = transformString
-		faceStyling.prependSvg(faces[i],[ [50,0],[100,kiteRatio],[50,100],[0,kiteRatio] ]);
+		faceStyling.prependSvg(faces[i],[ [50,0],[100,kiteRatio],[50,100],[0,kiteRatio] ], i, facePattern);
 	};
 
 	faceStyling.apply(this, faceStyles, shapeStyle)

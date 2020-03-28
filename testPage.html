@@ -30,6 +30,29 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
     <script src='dist/3d-elements.js'></script>
 
+    <svg height="0">
+        <defs>
+            <pattern id="star" viewBox="0,0,10,10" width="10%" height="10%">
+                <polygon points="0,0 2,5 0,10 5,8 10,10 8,5 10,0 5,2"/>
+            </pattern>
+            <pattern id="xmas" viewBox="0,0,10,10" width="20%" height="20%">
+                <polygon fill="red" points="0,0 10,0 10,10 0,10 0,0"/>
+                <polygon fill="lime" points="0,0 2,5 0,10 5,8 10,10 8,5 10,0 5,2"/>
+            </pattern>
+              <pattern id="p1" x="12.5" y="12.5" width="25" height="25"
+                  patternContentUnits="userSpaceOnUse"
+                  patternUnits="userSpaceOnUse">
+                <circle cx="10" cy="10" r="10" />
+            </pattern>
+            <pattern id="bricks" patternUnits="userSpaceOnUse" width="74" height="49">
+                <image href="assets/bricks.png" x="0" y="0" width="74" height="49" />
+            </pattern>
+            <radialGradient id="myGradient">
+                <stop offset="0%"   stop-color="pink" />
+                <stop offset="100%" stop-color="black" />
+              </radialGradient>
+        </defs>
+    </svg>
 
     <h1>This is a using dist</h1>
     <p>This is a paragraph.</p>
@@ -45,10 +68,11 @@
             <div class="preset-e3d-black">3</div>
         </figure>
 
-        <figure e3d-shape="Cuboid" e3d-hide-until-folded=""
-        size="20 100 100"
+        <figure e3d-shape="PentagonalTrapezohedron" e3d-hide-until-folded=""
+        size="200 100 100"
         spin="30 60 10"
-        move="100 100 100"
+        move="50 -20 00"
+        face-pattern="#bricks"
         face-class="center blue">
             <div class="blue">Can this be folded?</div>
             <div>Can this be folded?</div>
@@ -58,12 +82,18 @@
     </div>
 
     <script>
+
+        function patternFunction (face, faceIndex) {
+            return (faceIndex < 6) ? '#xmas' : '#bricks'
+        }
+
         var shape = e3d.make.TruncatedCube({
-            size: [160,50],
+            size: [160,60],
             spin: [55,0,65],
             move: [100,150,0],
             faceContent: [e3d.presets.numbered, e3d.presets.allGreen],
-            faceClass: ['preset-e3d-svg-pointer', 'preset-e3d-hover']
+            faceClass: ['preset-e3d-svg-pointer', 'preset-e3d-hover'],
+            facePattern: patternFunction
         })
        document.querySelector('#frame').appendChild(shape)
     

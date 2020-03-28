@@ -1,7 +1,7 @@
 import * as E3d from '../base/baseE3d'
 import * as faceStyling from '../base/faceStyling'
 
-function setUpFaces (size,units='px') {
+function setUpFaces (size, units='px', facePattern=null) {
     var faces = this.children;        
     var transformString;
     var triangleHeight = size[0] * Math.sqrt(3) / 2;
@@ -22,7 +22,7 @@ function setUpFaces (size,units='px') {
         faceStyles[i]["padding-left"] = '25%';        
         faceStyles[i]["padding-right"]='25%';        
         faceStyles[i]["padding-top"]='40%';    
-        faceStyling.prependSvg(faces[i],[ [50,0],[100,100],[0,100] ]);
+        faceStyling.prependSvg(faces[i],[ [50,0],[100,100],[0,100] ], i, facePattern);
         transformString = '';
         if (i < 4) {
             transformString += 'translateY(' + (pyramidHeight/2-triangleHeight/2) + units +')';                

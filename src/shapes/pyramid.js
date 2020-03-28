@@ -2,7 +2,7 @@ import * as faceStyling from '../base/faceStyling'
 import * as E3d from '../base/baseE3d'
 
 
-const setUpFaces = function(size,units='px') {
+const setUpFaces = function(size, units='px', facePattern=null) {
     var faces = this.children;
     var hypoth,angle, transformString;
     function pythag (side1,side2) {return Math.sqrt ( (side1*side1) +(side2*side2) );}
@@ -62,7 +62,7 @@ const setUpFaces = function(size,units='px') {
     faceStyles[4].transform = transformString;
 
     for (var i=1; i<=4; i++){
-        faceStyling.prependSvg(faces[i],[ [50,0],[100,100],[0,100] ]);
+        faceStyling.prependSvg(faces[i],[ [50,0],[100,100],[0,100] ], i, facePattern);
         faceStyles[i]["text-align"]="center";
         faceStyles[i]["padding-top"]='50%';
     };

@@ -1,7 +1,7 @@
 import * as E3d from '../base/baseE3d'
 import * as faceStyling from '../base/faceStyling'
 
-function setUpFaces (size,units='px') {
+function setUpFaces (size, units='px', facePattern=null) {
 	let faceStyles = faceStyling.makeList(20)
 
 	var faces = this.children;
@@ -22,7 +22,7 @@ function setUpFaces (size,units='px') {
 		faceStyles[i].height = triangleHeight + units;
 		faceStyles[i]['text-align'] ="center";
 		faceStyles[i]['padding']='5% 25% 40% 25%';
-		faceStyling.prependSvg(faces[i],[ [50,100],[100,0],[0,0] ]);
+		faceStyling.prependSvg(faces[i],[ [50,100],[100,0],[0,0] ], i, facePattern);
 	}
 
 	var startTransform = '';
