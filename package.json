@@ -1,6 +1,6 @@
 {
   "name": "3d-elements",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/3d-elements.js",
   "scripts": {
