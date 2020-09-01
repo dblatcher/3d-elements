@@ -1,4 +1,4 @@
-# 3d-shapes
+# 3d-Elements
 ## Description
 A library for rendering geometric solids comprised of html and svg elements 3d rotated using the transform CSS property, providing interfaces for controlling the rotation and position of rendered shapes.
 
