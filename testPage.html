@@ -30,6 +30,13 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
     <script src='dist/3d-elements.js'></script>
 
+    <h1>3d-elements test page 1</h1>
+    <ul>
+        <li>svg patterns</li>
+        <li>hover effects</li>
+        <li>click handling</li>
+    </ul>
+
     <svg height="0">
         <defs>
             <pattern id="star" viewBox="0,0,10,10" width="10%" height="10%">
@@ -54,8 +61,6 @@
         </defs>
     </svg>
 
-    <h1>This is a using dist</h1>
-    <p>This is a paragraph.</p>
 
     <div id='frame' style="perspective: 10000px;">
         <figure e3d-shape="Cube" e3d-hide-until-folded=""
@@ -81,6 +86,8 @@
         </figure>
     </div>
 
+    <p id="output">click a face</p>
+
     <script>
 
         function patternFunction (face, faceIndex) {
@@ -105,21 +112,22 @@
         })
        document.querySelector('#frame').appendChild(shape2)
 
-
        var face;
        var makeHandler = function (face) {
             return function (event){
-                console.log(face.getAttribute('e3d-face'))
-            }    
+                document.getElementById('output').innerText = 
+                'clicked face #' + face.getAttribute('e3d-face') + ' , with content"'+ face.innerText +'".'
+            }
         }
-       
+
        for (var i = 0; i < shape.childElementCount-1; i++) {
             face = shape.children[i]
             face.pointerTarget.addEventListener('click', makeHandler(face))
         }
-            
-
-
+       for (var i = 0; i < shape2.childElementCount-1; i++) {
+            face = shape2.children[i]
+            face.pointerTarget.addEventListener('click', makeHandler(face))
+        }
         var t = document.querySelector('figure')
 
     </script>

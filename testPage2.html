@@ -30,8 +30,11 @@
     <script src='dist/3d-elements.js'></script>
 
 
-    <h1>This is a using dist</h1>
-    <p>This is a paragraph.</p>
+    <h1>3d-elements test page 2</h1>
+    <ul>
+        <li>shapes in shapes</li>
+        <li>animations</li>
+    </ul>
 
     <div style="perspective: 10000px;">
         <figure e3d-shape="Dodecahedron"
@@ -69,16 +72,15 @@
 
         </figure>
 
-
     </div>
+    <button onclick="turn()">go</button>
+    <button onclick="stop()">stop</button>
 
     <script>
 
         var rod = document.querySelector('#rod')
-        function turn() {
-           //
-            rod.constant.go()
-        }
+        function turn() {rod.constant.go()}
+        function stop() {rod.constant.stop()}
 
     </script>
 
