@@ -1,7 +1,7 @@
 {
   "name": "3d-elements",
   "version": "1.0.5",
-  "description": "",
+  "description": "A library for rendering geometric solids comprised of html and svg elements 3d rotated using the transform CSS property, providing interfaces for controlling the rotation and position of rendered shapes.",
   "main": "dist/3d-elements.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
